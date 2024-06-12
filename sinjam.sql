@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2024 at 09:43 AM
+-- Generation Time: Jun 12, 2024 at 01:00 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -91,6 +91,19 @@ INSERT INTO `fasilitas` (`id_fasilitas`, `nama_fasilitas`, `lokasi`, `pic`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kak`
+--
+
+CREATE TABLE `kak` (
+  `id_kak` int(11) NOT NULL,
+  `id_pinjam` int(11) NOT NULL,
+  `file` int(11) NOT NULL,
+  `tgl_upload` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mahasiswa`
 --
 
@@ -150,6 +163,12 @@ ALTER TABLE `fasilitas`
   ADD PRIMARY KEY (`id_fasilitas`);
 
 --
+-- Indexes for table `kak`
+--
+ALTER TABLE `kak`
+  ADD PRIMARY KEY (`id_kak`);
+
+--
 -- Indexes for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
@@ -176,6 +195,12 @@ ALTER TABLE `disposisi`
 --
 ALTER TABLE `fasilitas`
   MODIFY `id_fasilitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `kak`
+--
+ALTER TABLE `kak`
+  MODIFY `id_kak` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
