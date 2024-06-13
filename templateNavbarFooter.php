@@ -38,6 +38,7 @@
 <style>
 .custom-navbar {
   font-family: 'Gotham';
+  font-size: 16px !important;
   position: fixed;
   width: 100%;
   z-index: 100;
@@ -107,10 +108,9 @@
       .custom-navbar .custom-navbar-cta li:first-child {
         margin-right: 20px; }
 </style>
-<br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 
 
-<!-- TEMPLATE FOOTER -->
 <footer class="footer-section">
 	<div class="container relative">
     <div class="row">
@@ -141,14 +141,13 @@
 		<div class="border-top copyright">
 			<div class="row mt-3">
 				<div class="col">
-					<p class="mb-2 text-center ">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Sistem Informasi Peminjaman Universitas Pembangunan Nasional "Veteran" Jakarta <!-- License information: https://untree.co/license/ --></p>
+					<p class="mb-2 text-center ">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Sistem Informasi Peminjaman Universitas Pembangunan Nasional "Veteran" Jakarta</p>
 				</div>
 			</div>
 		</div>
 	</div>
 </footer>
 
-<!-- CSS FOOTER -->
 <style>
   .footer-section {
     padding: 80px 0;
