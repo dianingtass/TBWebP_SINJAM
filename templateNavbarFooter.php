@@ -34,6 +34,7 @@
 			</div>	
 		</nav>
     <br><br><br>
+    
 <!-- CSS NAVBAR -->
 <style>
 .custom-navbar {
