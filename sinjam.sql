@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2024 at 11:58 AM
+-- Generation Time: Jun 13, 2024 at 05:22 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -150,7 +150,8 @@ CREATE TABLE `peminjaman` (
   `deskripsi` varchar(50) NOT NULL,
   `tgl_pinjam` date NOT NULL,
   `tgl_pengajuan` date NOT NULL,
-  `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL
+  `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL,
+  `notes` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
