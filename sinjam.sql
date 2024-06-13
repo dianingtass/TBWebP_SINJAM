@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2024 at 11:58 AM
+-- Generation Time: Jun 13, 2024 at 05:06 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -150,7 +150,8 @@ CREATE TABLE `peminjaman` (
   `deskripsi` varchar(50) NOT NULL,
   `tgl_pinjam` date NOT NULL,
   `tgl_pengajuan` date NOT NULL,
-  `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL
+  `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL,
+  `notes` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -207,7 +208,7 @@ ALTER TABLE `peminjaman`
 -- AUTO_INCREMENT for table `disposisi`
 --
 ALTER TABLE `disposisi`
-  MODIFY `id_disposisi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_disposisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `fasilitas`
@@ -231,7 +232,7 @@ ALTER TABLE `kak`
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
