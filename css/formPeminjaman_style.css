@@ -47,6 +47,8 @@ a {
 
 .custom-navbar {
   font-family: 'Gotham';
+  position: fixed;
+  width: 100%;
   background: #208aae !important;
   padding-top: 20px;
   padding-bottom: 20px; }
