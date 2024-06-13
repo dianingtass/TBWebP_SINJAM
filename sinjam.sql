@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2024 at 01:00 PM
+-- Generation Time: Jun 13, 2024 at 11:58 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -72,21 +72,33 @@ CREATE TABLE `fasilitas` (
 --
 
 INSERT INTO `fasilitas` (`id_fasilitas`, `nama_fasilitas`, `lokasi`, `pic`) VALUES
-(1, 'FIKLAB-201', 'pl', 'FIK'),
-(2, 'FIKLAB-202', 'pl', 'FIK'),
-(3, 'FIKLAB-203', 'pl', 'FIK'),
-(4, 'Selasar FIK', 'pl', 'FIK'),
-(5, 'Ubin Coklat', 'pl', 'FEB'),
-(6, 'Auditorium dr. Wahidin', 'pl', 'FK'),
-(7, 'Plaza Wahidin', 'pl', 'FK'),
-(8, 'Auditorium MERCe', 'limo', 'FK'),
-(9, 'Laboratorium Diplomasi', 'pl', 'FISIP'),
-(10, 'Auditorium Tanah Airku', 'limo', 'FT'),
-(11, 'Auditorium Bhinneka Tunggal Ika', 'pl', 'Rektorat'),
-(12, 'Plaza Wardiman', 'pl', 'Rektorat'),
-(13, 'Plaza Internet', 'pl', 'Rektorat'),
-(14, 'Lapangan Olahraga', 'pl', 'Rektorat'),
-(15, 'Aula Serbaguna', 'pl', 'Rektorat');
+(1, 'FIKLAB', 'pl', 'FIK'),
+(2, 'Selasar FIK', 'pl', 'FIK'),
+(3, 'Ubin Coklat', 'pl', 'FEB'),
+(4, 'Auditorium dr. Wahidin', 'pl', 'FK'),
+(5, 'Plaza Wahidin', 'pl', 'FK'),
+(6, 'Auditorium MERCe', 'limo', 'FK'),
+(7, 'Laboratorium Diplomasi', 'pl', 'FISIP'),
+(8, 'Auditorium Tanah Airku', 'limo', 'FT'),
+(9, 'Auditorium Bhinneka Tunggal Ika', 'pl', 'Rektorat'),
+(10, 'Plaza Wardiman', 'pl', 'Rektorat'),
+(11, 'Plaza Internet', 'pl', 'Rektorat'),
+(12, 'Lapangan Olahraga', 'pl', 'Rektorat'),
+(13, 'Aula Serbaguna', 'pl', 'Rektorat');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id_feedback` int(11) NOT NULL,
+  `nim` varchar(10) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `feedback` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -97,8 +109,8 @@ INSERT INTO `fasilitas` (`id_fasilitas`, `nama_fasilitas`, `lokasi`, `pic`) VALU
 CREATE TABLE `kak` (
   `id_kak` int(11) NOT NULL,
   `id_pinjam` int(11) NOT NULL,
-  `file` int(11) NOT NULL,
-  `tgl_upload` int(11) NOT NULL
+  `file` varchar(255) NOT NULL,
+  `tgl_upload` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -134,7 +146,8 @@ INSERT INTO `mahasiswa` (`nim`, `nama`, `email`, `password`) VALUES
 CREATE TABLE `peminjaman` (
   `id_pinjam` int(11) NOT NULL,
   `nim` varchar(10) NOT NULL,
-  `id_fasilitas` varchar(50) NOT NULL,
+  `id_fasilitas` int(11) NOT NULL,
+  `deskripsi` varchar(50) NOT NULL,
   `tgl_pinjam` date NOT NULL,
   `tgl_pengajuan` date NOT NULL,
   `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL
@@ -161,6 +174,12 @@ ALTER TABLE `disposisi`
 --
 ALTER TABLE `fasilitas`
   ADD PRIMARY KEY (`id_fasilitas`);
+
+--
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id_feedback`);
 
 --
 -- Indexes for table `kak`
@@ -195,6 +214,12 @@ ALTER TABLE `disposisi`
 --
 ALTER TABLE `fasilitas`
   MODIFY `id_fasilitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id_feedback` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kak`
