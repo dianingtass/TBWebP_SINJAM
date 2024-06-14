@@ -28,6 +28,11 @@ h1{
   font-size: 16px;
 }
 
+td{
+  font-family: 'Open Sans';
+  font-size: 14px;
+}
+
 .unduhKAK{
   color: #208aae !important;
   text-decoration: none;
