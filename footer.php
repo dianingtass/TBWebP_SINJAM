@@ -15,7 +15,7 @@
 	<div class="container relative">
     <div class="row">
       <div class="col-4 mt-5">
-        <a href="index.html" style="font-weight: 650; font-size: 32px; color:#208aae">SINJAM<span style="font-weight:100; color: black;">UPNVJ</span></a>
+        <a href="dashboard.php" style="font-weight: 650; font-size: 32px; color:#208aae">SINJAM<span style="font-weight:100; color: black;">UPNVJ</span></a>
       </div>
       <div class="col-4">
         <div class="mb-4 footer-h1">Menu</div>
