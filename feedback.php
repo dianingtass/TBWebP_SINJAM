@@ -38,33 +38,34 @@ if (isset($_POST["submit"])) {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="css/tiny-slider.css" rel="stylesheet">
   <link href="css/feedback_style.css" rel="stylesheet">
+  <title>SINJAM UPNVJ</title>
 </head>
 <body>
 
 <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
-<div class="container">
-  <a class="navbar-brand" href="index.html">SINJAM<span>UPNVJ</span></a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarsFurni">
-    <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-      <li><a class="nav-link" href="fasilitas.php">Fasilitas</a></li>
-      <li><a class="nav-link" href="cekKetersediaan.php">Jadwal</a></li>
-      <li><a class="nav-link" href="formPeminjaman.php">Peminjaman</a></li>
-      <li><a class="nav-link" href="feedback.php">Feedback</a></li>
-      <li><a class="nav-link" href="FAQ.php">FAQ</a></li>
-    </ul>
-    <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-      <li><a class="nav-link" href="profile.php"><img src="images/user.svg"></a></li>
-    </ul>
-  </div>
-</div>  
-</nav>
-<br><br><br><br>
+			<div class="container">
+				<a class="navbar-brand" href="index.html">SINJAM<span>UPNVJ</span></a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li><a class="nav-link" href="fasilitas.php">Fasilitas</a></li>
+						<li><a class="nav-link" href="cekKetersediaan.php">Jadwal</a></li>
+						<li><a class="nav-link" href="formPeminjaman.php">Peminjaman</a></li>
+						<li><a class="nav-link" href="feedback.php">Feedback</a></li>
+						<li><a class="nav-link" href="FAQ.php">FAQ</a></li>
+					</ul>
+					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+						<li><a class="nav-link" href="profile.php"><i class="fa-regular fa-user"></i></a></li>
+					</ul>
+				</div>
+			</div>	
+		</nav>
+    <br><br><br>
 
 <div class="container">
-  <br>
+  <br><br><br>
   <div class="block">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-8 pb-4">
