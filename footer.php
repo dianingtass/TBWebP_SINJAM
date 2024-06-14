@@ -50,7 +50,7 @@
 
 <style>
   .footer-section {
-    padding: 80px 0;
+    padding: 50px 0 12px;
     background: #eef6f8;
     font-family: 'Gotham';
   }
