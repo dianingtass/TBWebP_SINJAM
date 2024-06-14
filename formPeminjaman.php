@@ -81,29 +81,32 @@
         }
 
 		else {
-			if($fasilitas == "1"){
+			if(isset($_POST["fiklab-201"])){
 				$tmp = htmlentities(strip_tags(trim($_POST["fiklab-201"])));
 				if($tmp == "1"){
 					$deskripsi .= "201";
 				}
+			}
+			if(isset($_POST["fiklab-202"])){
 				$tmp = htmlentities(strip_tags(trim($_POST["fiklab-202"])));
 				if($tmp == "2"){
 					$deskripsi .= ", 202";
 				}
+			}
+			if(isset($_POST["fiklab-203"])){
 				$tmp = htmlentities(strip_tags(trim($_POST["fiklab-203"])));
 				if($tmp == "3"){
 					$deskripsi .= ", 203";
 				}
-				$first2 = substr($deskripsi, 0, 2);
-				if($first2 == ", "){
-					$deskripsi = substr($deskripsi, 2, strlen($deskripsi));
-				}
+			}
+			if (substr($deskripsi, 0, 2) == ", ") {
+				$deskripsi = substr($deskripsi, 2);
 			}
 	
 			if ($nm_file) {
 				$dir = "KAK/" . $nm_file;
 				move_uploaded_file($tmp_file, $dir);
-				$sql_peminjaman = "INSERT INTO peminjaman(nim, id_fasilitas, deskripsi, tgl_pinjam, tgl_pengajuan, status) VALUES ('$nim', $fasilitas, '$deskripsi', '$tgl_pinjam', '$tgl_pengajuan', 1)";
+				$sql_peminjaman = "INSERT INTO peminjaman(nim, id_fasilitas, deskripsi, tgl_pinjam, tgl_pengajuan, jam_mulai, jam_selesai, status) VALUES ('$nim', $fasilitas, '$deskripsi', '$tgl_pinjam', '$tgl_pengajuan', '$jam_mulai', '$jam_selesai', 1)";
 				$queryPinjam = mysqli_query($conn, $sql_peminjaman) or die(mysqli_error($conn));
 	
 				if ($queryPinjam) {
@@ -254,9 +257,14 @@
 		            <div class="form-group">
 		                <label for="c_kak" class="text-black">Kerangka Acuan Kerja (KAK) <span class="text-danger">*</span></label>
 		                <input type="file" class="form-control" id="c_kak" name="c_kak" accept=".doc, .docx, .pdf">
-						<span class="text-danger" style="margin-left:1rem;">*</span><i>(.doc, .docx, .pdf)</i>
-		            </div>
-                    <br>
+						<table width="100%">
+							<tr>
+								<td><span class="text-danger" style="margin-left:1rem;">*</span><i>(.doc, .docx, .pdf)</i></td>
+								<td style="float:right">Belum memiliki <i>template</i> KAK? <a class="unduhKAK" href="KAK/Template-KAK.docx" download="Template-KAK.docx"><b>Unduh Disini</b></a></td>
+							</tr>
+						</table>
+					</div>
+				<br>
                     <div>
                         <input id="submit" type="submit" name="submit" value="Submit" class="submit">
                     </div>
