@@ -32,6 +32,14 @@ input{
   background-color: #fff;
 }
 
+#notifAlert{
+  font-family: 'Open Sans' !important;
+}
+
+#c_fasilitas, #c_tanggal, #c_jamMulai, #c_jamSelesai{
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
   -webkit-transition: .3s all ease;
