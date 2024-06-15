@@ -32,19 +32,20 @@ if (isset($_POST["submit"])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="favicon.png">
   <meta name="description" content="" />
   <meta name="keywords" content="bootstrap, bootstrap4" />
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <link href="css/tiny-slider.css" rel="stylesheet">
-  <link href="css/feedback_style.css" rel="stylesheet">
-  <title>SINJAM UPNVJ</title>
+	<!-- Bootstrap CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<link href="css/feedback_style.css" rel="stylesheet">
+	<title>SINJAM UPNVJ</title>
 </head>
-<body>
 
+<!-- TEMPLATE NAVBAR -->
 <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
 			<div class="container">
-				<a class="navbar-brand" href="index.html">SINJAM<span>UPNVJ</span></a>
+				<a class="navbar-brand" href="dashboard.php">SINJAM<span>UPNVJ</span></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -69,7 +70,7 @@ if (isset($_POST["submit"])) {
   <div class="block">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-8 pb-4">
-        <h2>FEEDBACK</h2>
+        <h2>Feedback</h2>
         <p>Anda dapat memberikan feedback kepada layanan SINJAM UPN "Veteran" Jakarta pada halaman ini.</p>
 
         <!-- Tampilkan pesan sukses jika ada -->
@@ -93,11 +94,11 @@ if (isset($_POST["submit"])) {
             </div>
           </div>
           <div class="form-group">
-            <label class="text-black" for="email">Email address</label>
+            <label class="text-black" for="email" style="padding-top: 20px">Email address</label>
             <input type="email" name="email" class="form-control" id="email" required>
           </div>
           <div class="form-group mb-5">
-            <label class="text-black" for="feedback">Feedback</label>
+            <label class="text-black" for="feedback" style="padding-top: 20px">Feedback</label>
             <textarea name="feedback" class="form-control" id="feedback" cols="30" rows="5" required></textarea>
           </div>
           <button type="submit" name="submit" class="submit">Kirim Feedback</button>
@@ -108,10 +109,10 @@ if (isset($_POST["submit"])) {
 </div>
 </body>
 <footer class="footer-section">
-  <div class="container relative">
+	<div class="container relative">
     <div class="row">
       <div class="col-4 mt-5">
-        <a href="index.html" style="font-weight: 650; font-size: 32px; color:#208aae">SINJAM<span style="font-weight:100; color: black;">UPNVJ</span></a>
+        <a href="dashboard.php" style="font-weight: 650; font-size: 32px; color:#208aae">SINJAM<span style="font-weight:100; color: black;">UPNVJ</span></a>
       </div>
       <div class="col-4">
         <div class="mb-4 footer-h1">Menu</div>
@@ -131,16 +132,17 @@ if (isset($_POST["submit"])) {
             <li>sinjam@upnvj.ac.id</li>            
           </ul>
         </div>
-        <br><br>
-      </div>
+      <br><br>
     </div>
-    <div class="border-top copyright">
-      <div class="row mt-3">
-        <div class="col">
-          <p class="mb-2 text-center ">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Sistem Informasi Peminjaman Universitas Pembangunan Nasional "Veteran" Jakarta</p>
-        </div>
-      </div>
-    </div>
-  </div>
+        
+		<div class="border-top copyright">
+			<div class="row mt-3">
+				<div class="col">
+					<p class="mb-2 text-center ">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Sistem Informasi Peminjaman Universitas Pembangunan Nasional "Veteran" Jakarta</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </footer>
+
 </html>
