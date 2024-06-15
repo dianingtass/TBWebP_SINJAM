@@ -28,6 +28,7 @@
         WHERE (p.nim='$nim') 
         AND (p.id_pinjam LIKE '%$search_id%')
         AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
+        AND ((p.status = 'Diproses') OR (p.status = 'Diterima' AND p.tgl_pinjam >= CURDATE()))
         ORDER BY {$valid_sort_columns[$sort_column]} $sort_order";
     
     $result = mysqli_query($conn, $query);
@@ -90,7 +91,13 @@
                     <input type="text" class="form-control" id="search_fasilitas" name="search_fasilitas" placeholder="Fasilitas" value="<?php echo isset($_GET['search_fasilitas']) ? $_GET['search_fasilitas'] : ''; ?>">
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-block col-md-1 mb-3" id="btn">Search</button>
+                <div class="col-md-1 mb-3">
+                    <button type="submit" class="btn btn-primary btn-block" id="btn">Search</button>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <a href="historyPeminjaman.php" class="btn btn-secondary btn-block">Riwayat Peminjaman</a>
+                </div>
             </div>
         </form>
         <br>
