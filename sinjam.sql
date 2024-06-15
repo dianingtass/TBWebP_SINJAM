@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2024 at 07:51 AM
+-- Generation Time: Jun 15, 2024 at 06:25 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `adminupn`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE `adminupn` (
   `nip` varchar(10) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -35,10 +35,10 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `adminupn`
 --
 
-INSERT INTO `admin` (`nip`, `nama`, `email`, `password`) VALUES
+INSERT INTO `adminupn` (`nip`, `nama`, `email`, `password`) VALUES
 ('001', 'Administrator', 'administrator@upnvj.ac.id', 'pass4admin');
 
 -- --------------------------------------------------------
@@ -64,27 +64,30 @@ CREATE TABLE `fasilitas` (
   `id_fasilitas` int(11) NOT NULL,
   `nama_fasilitas` varchar(50) NOT NULL,
   `lokasi` enum('pl','limo') NOT NULL,
-  `pic` enum('FIK','FISIP','FEB','FK','FT','Rektorat') NOT NULL
+  `pic` enum('FIK','FISIP','FEB','FK','FT','Rektorat','FH') NOT NULL,
+  `deskripsi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `fasilitas`
 --
 
-INSERT INTO `fasilitas` (`id_fasilitas`, `nama_fasilitas`, `lokasi`, `pic`) VALUES
-(1, 'FIKLAB', 'pl', 'FIK'),
-(2, 'Selasar FIK', 'pl', 'FIK'),
-(3, 'Ubin Coklat', 'pl', 'FEB'),
-(4, 'Auditorium dr. Wahidin', 'pl', 'FK'),
-(5, 'Plaza Wahidin', 'pl', 'FK'),
-(6, 'Auditorium MERCe', 'limo', 'FK'),
-(7, 'Laboratorium Diplomasi', 'pl', 'FISIP'),
-(8, 'Auditorium Tanah Airku', 'limo', 'FT'),
-(9, 'Auditorium Bhinneka Tunggal Ika', 'pl', 'Rektorat'),
-(10, 'Plaza Wardiman', 'pl', 'Rektorat'),
-(11, 'Plaza Internet', 'pl', 'Rektorat'),
-(12, 'Lapangan Olahraga', 'pl', 'Rektorat'),
-(13, 'Aula Serbaguna', 'pl', 'Rektorat');
+INSERT INTO `fasilitas` (`id_fasilitas`, `nama_fasilitas`, `lokasi`, `pic`, `deskripsi`) VALUES
+(1, 'FIKLAB', 'pl', 'FIK', ''),
+(2, 'Selasar FIK', 'pl', 'FIK', ''),
+(3, 'Ubin Coklat', 'pl', 'FEB', ''),
+(4, 'Auditorium dr. Wahidin', 'pl', 'FK', ''),
+(5, 'Plaza Wahidin', 'pl', 'FK', ''),
+(6, 'Auditorium MERCe', 'limo', 'FK', ''),
+(7, 'Laboratorium Diplomasi', 'pl', 'FISIP', ''),
+(8, 'Auditorium Tanah Airku', 'limo', 'FT', ''),
+(9, 'Auditorium Bhinneka Tunggal Ika', 'pl', 'Rektorat', ''),
+(10, 'Plaza Wardiman', 'pl', 'Rektorat', ''),
+(11, 'Plaza Internet', 'pl', 'Rektorat', ''),
+(12, 'Lapangan Olahraga', 'pl', 'Rektorat', ''),
+(13, 'Aula Serbaguna', 'pl', 'Rektorat', ''),
+(14, 'Auditorium BEJ', 'pl', 'FEB', ''),
+(15, 'Ruang Sidang FH', 'pl', 'FH', '');
 
 -- --------------------------------------------------------
 
@@ -122,6 +125,8 @@ CREATE TABLE `kak` (
 CREATE TABLE `mahasiswa` (
   `nim` varchar(10) NOT NULL,
   `nama` varchar(50) NOT NULL,
+  `program_studi` varchar(50) NOT NULL,
+  `fakultas` varchar(50) NOT NULL,
   `email` varchar(32) NOT NULL,
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -130,12 +135,12 @@ CREATE TABLE `mahasiswa` (
 -- Dumping data for table `mahasiswa`
 --
 
-INSERT INTO `mahasiswa` (`nim`, `nama`, `email`, `password`) VALUES
-('2210512048', 'Septian Sugiarta Saputra', '2210512048@mahasiswa.upnvj.ac.id', 'pass048'),
-('2210512049', 'Safira Ramadhani', '2210512049@mahasiswa.upnvj.ac.id', 'pass049'),
-('2210512056', 'Dianingtas Hartono Simajorang', '2210512056@mahasiswa.upnvj.ac.id', 'pass056'),
-('2210512065', 'Kayla Nagioti Nasution', '2210512065@mahasiswa.upnvj.ac.id', 'pass065'),
-('2210512070', 'Salsabillah Febridha', '2210512070@mahasiswa.upnvj.ac.id', 'pass070');
+INSERT INTO `mahasiswa` (`nim`, `nama`, `program_studi`, `fakultas`, `email`, `password`) VALUES
+('2210512048', 'Septian Sugiarta Saputra', 'S1 Sistem Informasi', 'Fakultas Ilmu Komputer', '2210512048@mahasiswa.upnvj.ac.id', 'pass048'),
+('2210512049', 'Safira Ramadhani', 'S1 Sistem Informasi', 'Fakultas Ilmu Komputer', '2210512049@mahasiswa.upnvj.ac.id', 'pass049'),
+('2210512056', 'Dianingtas Hartono Simajorang', 'S1 Sistem Informasi', 'Fakultas Ilmu Komputer', '2210512056@mahasiswa.upnvj.ac.id', 'pass056'),
+('2210512065', 'Kayla Nagioti Nasution', 'S1 Sistem Informasi', 'Fakultas Ilmu Komputer', '2210512065@mahasiswa.upnvj.ac.id', 'pass065'),
+('2210512070', 'Salsabillah Febridha', 'S1 Sistem Informasi', 'Fakultas Ilmu Komputer', '2210512070@mahasiswa.upnvj.ac.id', 'pass070');
 
 -- --------------------------------------------------------
 
@@ -181,9 +186,9 @@ CREATE TABLE `peminjaman` (
 --
 
 --
--- Indexes for table `admin`
+-- Indexes for table `adminupn`
 --
-ALTER TABLE `admin`
+ALTER TABLE `adminupn`
   ADD PRIMARY KEY (`nip`);
 
 --
@@ -242,7 +247,7 @@ ALTER TABLE `disposisi`
 -- AUTO_INCREMENT for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
-  MODIFY `id_fasilitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_fasilitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `feedback`
