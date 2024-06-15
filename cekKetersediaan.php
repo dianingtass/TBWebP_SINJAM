@@ -18,7 +18,7 @@
 
 <?php include "navbar.php" ?>
 
-<br><br><br>
+<br><br>
 <div class="container">
   <br>
   <h2>Peminjaman Fasilitas Universitas Pembangunan Nasional "Veteran" Jakarta</h2>
@@ -150,6 +150,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>
+<br><br>
 
 <?php include "footer.php" ?>
 
