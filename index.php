@@ -1,14 +1,82 @@
+<?php
+    include("config.php");
+    $emailErrMhs = $passErrMhs = "";
+    $emailErrAdm = $passErrAdm = "";
+
+    if (isset($_POST["loginMhs"])) {
+        $email = htmlentities(strip_tags(trim($_POST["email-mhs"])));
+        $password = htmlentities(strip_tags(trim($_POST["password-mhs"])));
+
+        if (empty($email)) {
+            $emailErrMhs = "Email masih kosong. Mohon isi terlebih dahulu!";
+        }
+        else {
+            $queryEmail = "SELECT * FROM mahasiswa WHERE email='$email'";
+            $resultEmail = mysqli_query($conn, $queryEmail);
+
+            if (mysqli_num_rows($resultEmail) > 0) {
+                $row = mysqli_fetch_assoc($resultEmail);
+
+                if($password == $row['password']) {
+                    header("Location: dashboard.php");
+                    exit();
+                }
+                else {
+                    $passErrMhs = "Password salah!";
+                }
+            }
+            else {
+                $emailErrMhs = "Email belum terdaftar!";
+            }
+        }
+    }
+
+    if (isset($_POST["loginAdm"])) {
+        $email = htmlentities(strip_tags(trim($_POST["email-adm"])));
+        $password = htmlentities(strip_tags(trim($_POST["password-adm"])));
+
+        if (empty($email)) {
+            $emailErrAdm = "Email masih kosong. Mohon isi terlebih dahulu!";
+        }
+        else {
+            $queryEmail = "SELECT * FROM adminupn WHERE email='$email'";
+            $resultEmail = mysqli_query($conn, $queryEmail);
+
+            if (mysqli_num_rows($resultEmail) > 0) {
+                $row = mysqli_fetch_assoc($resultEmail);
+
+                if($password == $row['password']) {
+                    header("Location: managePeminjaman.php");
+                    exit();
+                }
+                else {
+                    $passErrAdm = "Password salah!";
+                }
+            }
+            else {
+                $emailErrAdm = "Email salah!";
+            }
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png">
     <link href="css\index_style.css" rel="stylesheet">
+
+    <!-- ICON DAN FONT -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    
+    <!-- BOOTSTRAP CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <title>SINJAM</title>
 </head>
 <body>
@@ -109,7 +177,7 @@
     </section>
 
     <!-- MODAL LOGIN MAHASISWA -->
-    <div class="modal fade" id="loginModalMhs" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal" id="loginModalMhs" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -119,48 +187,54 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="loginMhs.php">
+                    <form id="loginFormMhs" method="post" action="" enctype="multipart/form-data">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email" placeholder="Masukkan Email">
+                        <input type="email" class="form-control" id="email-mhs" name="email-mhs" placeholder="Masukkan Email">
 
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password-mhs" name="password-mhs" placeholder="Password">
+
+                        <div id="notifAlertMhs" class="alert alert-danger" style="display: none;"></div>
+
+                        <div class="modal-footer justify-content-center">
+                            <input id="submitMhs" type="submit" class="btn btn-primary" name="loginMhs" value="Login">
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer justify-content-center">
-                    <input type="submit" class="btn btn-primary" value="Login">
-                </div>
                 <div class="login-admin">
-                    <h4><a href="#" data-toggle="modal" data-target="#loginModalAdm">Masuk sebagai Admin</a></h4>
+                    <h4><a href="#" data-toggle="modal" data-target="#loginModalAdm" data-dismiss="modal">Masuk sebagai Admin</a></h4>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- MODAL LOGIN ADMIN -->
-    <div class="modal fade" id="loginModalAdm" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal" id="loginModalAdm" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Login</h3>
+                    <h3 class="modal-title">Login Admin</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="loginAdmin.php">
+                    <form id="loginFormAdm" method="post" action="" enctype="multipart/form-data">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="username" placeholder="Masukkan Email">
+                        <input type="email" class="form-control" id="email-adm" name="email-adm" placeholder="Masukkan Email">
 
                         <label>Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password-adm" name="password-adm" placeholder="Password">
+
+                        <div id="notifAlertAdm" class="alert alert-danger" style="display: none;"></div>
+
+                        <div class="modal-footer justify-content-center">
+                            <input id="submitAdm" type="submit" class="btn btn-primary" name="loginAdm" value="Login">
+                        </div>
                     </form>
                 </div>
-                <div class="modal-footer justify-content-center">
-                    <input type="submit" class="btn btn-primary" value="Login">
-                </div>
                 <div class="login-admin">
-                    <h4><a href="#" data-toggle="modal" data-target="#loginModalMhs">Masuk sebagai Mahasiswa</a></h4>
+                    <h4><a href="#" data-toggle="modal" data-target="#loginModalMhs" data-dismiss="modal">Masuk sebagai Mahasiswa</a></h4>
                 </div>
             </div>
         </div>
@@ -171,21 +245,17 @@
 		<div class="container relative">
             <div class="row">
                 <div class="col-4 mt-5">
-                    <a href="index.html" style="font-weight: 600; font-size: 32px; color:#208aae; font-family: 'Gotham';">SINJAM<span style="font-weight:100; color: black; font-family: 'Gotham'; opacity: .5;">UPNVJ</span></a>
+                    <a href="index.php" style="font-weight: 650; font-size: 32px; color:#208aae; font-family: 'Gotham';">SINJAM<span style="font-weight:100; color: black; font-family: 'Gotham';">UPNVJ</span></a>
                 </div>
                 
                 <div class="col-4">
-                    <div class="mb-4 footer-h1">Menu</div>
-                    <p class="mb-2"><a href="fasilitas.php">Fasilitas</a></p>
-                    <p class="mb-2"><a href="cekKetersediaan.php">Jadwal</a></p>
-                    <p class="mb-2"><a href="formPeminjaman.php">Peminjaman</a></p>
-                    <p class="mb-2"><a href="feedback.php">Feedback</a></p>
-                    <p class="mb-2"><a href="FAQ.php">FAQ</a></p>
+                    <div class="mb-4 footer-h1" style="font-family: 'Gotham';">Menu</div>
+                    <p class="mb-2"><a  href="#" data-toggle="modal" data-target="#loginModalMhs">Login</a></p>
                 </div>
 
                 <div class="col-4">
                     <div class="ml-9">
-                        <div class="mb-4 footer-h1">Contact</div>
+                        <div class="mb-4 footer-h1" style="font-family: 'Gotham';">Contact</div>
                         <ul class="list-unstyled">
                             <li>Universitas Pembangunan Nasional "Veteran" Jakarta</li>
                             <li>Jl. RS. Fatmawati, Pondok Labu, Jakarta Selatan, DKI Jakarta. 12450.</li>
@@ -204,11 +274,12 @@
 		</div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- BOOTSTRAP -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
+<script>
     $(document).ready(function() {
         $('#loginModalMhs').on('show.bs.modal', function (e) {
             $('#loginModalAdm').modal('hide');
@@ -218,6 +289,35 @@
             $('#loginModalMhs').modal('hide');
         });
     });
-    </script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var emailErrMhs = "<?php echo $emailErrMhs; ?>";
+        var passErrMhs = "<?php echo $passErrMhs; ?>";
+        var emailErrAdm = "<?php echo $emailErrAdm; ?>";
+        var passErrAdm = "<?php echo $passErrAdm; ?>";
+
+        if (emailErrMhs || passErrMhs) {
+            var alertBox = document.getElementById("notifAlertMhs");
+            if (emailErrMhs) {
+                alertBox.textContent = emailErrMhs;
+            } else {
+                alertBox.textContent = passErrMhs;
+            }
+            alertBox.style.display = "block";
+            $('#loginModalMhs').modal('show');
+        }
+
+        if (emailErrAdm || passErrAdm) {
+            var alertBox = document.getElementById("notifAlertAdm");
+            if (emailErrAdm) {
+                alertBox.textContent = emailErrAdm;
+            } else {
+                alertBox.textContent = passErrAdm;
+            }
+            alertBox.style.display = "block";
+            $('#loginModalAdm').modal('show');
+        }
+    });
+</script>
 </body>
 </html>
