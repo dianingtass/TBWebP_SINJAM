@@ -211,7 +211,7 @@
                             <option value="11">Plaza Internet</option>
                             <option value="12">Lapangan Olahraga</option>
                             <option value="13">Aula Serbaguna</option>
-                            <option value="14">Auditorium Bisnis Ekonomi Jaya</option>
+                            <option value="14">Auditorium BEJ</option>
                             <option value="15">Ruang Sidang FH</option>
                         </select>
                         <div id="c_fasilitas_fiklab" style="display: none;" class="form-group">
