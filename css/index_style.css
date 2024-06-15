@@ -1,5 +1,7 @@
 * {
     font-family: 'Open Sans';
+    padding: 0;
+    margin: 0;
 }
 @media screen and (max-width: 1060px) {
     #primary {width: 67%;}
@@ -23,7 +25,8 @@
 }
 a.navbar-brand {
     float: left;
-    padding: 10px 0px 10px 78px;
+    margin-left: 90px;
+    padding: 10px;
     font-size: 32px;
     color: #FFFFFF;
     font-weight: 600;
@@ -38,7 +41,7 @@ a.navbar-brand:hover {
     color: #FFFFFF;
 }
 .navbar-collapse {
-    padding: 10px 50px 10px 0px;
+    padding-right: 50px;
 }
 .nav-item a {
     font-size: 20px;
