@@ -57,13 +57,17 @@ if (isset($_GET['id_pinjam'])) {
 }
 
 if (!empty($id_pinjam)) {
-    $query = "SELECT * FROM peminjaman WHERE id_pinjam = '$id_pinjam'";
+    $query = "SELECT p.*, f.nama_fasilitas 
+              FROM peminjaman p 
+              JOIN fasilitas f ON p.id_fasilitas = f.id_fasilitas 
+              WHERE p.id_pinjam = '$id_pinjam'";
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
         $data = mysqli_fetch_assoc($result);
         $nim = $data['nim'];
         $id_fasilitas = $data['id_fasilitas'];
+        $nama_fasilitas = $data['nama_fasilitas'];
         $tgl_pinjam = date("d - m - Y", strtotime($data['tgl_pinjam']));
         $tgl_pengajuan = date("d - m - Y", strtotime($data['tgl_pengajuan']));
         $jam_mulai = $data['jam_mulai'];
@@ -110,7 +114,7 @@ mysqli_close($conn);
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link href="css/tiny-slider.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="css/detailPeminjaman_style.css" rel="stylesheet">
 </head>
 <body>
 <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
@@ -135,8 +139,8 @@ mysqli_close($conn);
             <input class="form-control" type="text" id="nim" value="<?php echo htmlspecialchars($nim); ?>" readonly>
         </div>
         <div class="mb-3">
-            <label for="id_fasilitas" class="form-label">ID Fasilitas</label>
-            <input class="form-control" type="text" id="id_fasilitas" value="<?php echo htmlspecialchars($id_fasilitas); ?>" readonly>
+            <label for="nama_fasilitas" class="form-label">Nama Fasilitas</label>
+            <input class="form-control" type="text" id="nama_fasilitas" value="<?php echo htmlspecialchars($nama_fasilitas); ?>" readonly>
         </div>
         <div class="mb-3">
             <label for="tgl_pinjam" class="form-label">Tanggal Peminjaman</label>
