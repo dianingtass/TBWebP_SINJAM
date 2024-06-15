@@ -12,7 +12,12 @@ th a{
 
 #btn{
     background-color: #208aae;
-    width: 7.5%;
+}
+
+@media (max-width: 768px){
+    .container, .form-control, .btn{
+        font-size: 13px !important;
+    }
 }
 
 .btn:hover {
