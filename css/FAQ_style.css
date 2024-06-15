@@ -1,3 +1,12 @@
-*{
-    
+/* CONTENT */
+content {
+    font-family: 'Open Sans';
+}
+
+.container h2 {
+    font-size: 35px;
+}
+
+.accordion-body {
+    font-size: 14px;
 }

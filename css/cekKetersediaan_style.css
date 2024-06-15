@@ -1,3 +1,29 @@
-*{
-    
+/*
+* Template Name: UntreeStore
+* Template Author: Untree.co
+* Author URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/
+
+th a{
+    text-decoration: none !important;
+    color: #212529;
+}
+
+#btn{
+    background-color: #208aae;
+    width: 7.5%;
+}
+
+.btn:hover {
+    color: #ffffff;
+    background: #222222;
+}
+
+h2 {
+    font-family: 'Gotham';
+}
+
+body {
+    font-family: "Open Sans" !important;
 }
