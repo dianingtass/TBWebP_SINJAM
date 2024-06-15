@@ -1,3 +1,16 @@
-*{
-    
+/* CONTENT */
+content {
+    background-color: #eff2f1 !important;
 }
+
+h1{
+    font-family: 'Gotham';
+    font-size: 32px !important;
+    text-align : center;
+  }
+
+@media (max-width: 768px) {
+    .card-title, .card-text {
+        text-align: center;
+    }
+}    
