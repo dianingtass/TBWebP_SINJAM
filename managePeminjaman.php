@@ -42,8 +42,8 @@
         <input type="text" class="form-control" id="search_nim" name="search_nim" placeholder="NIM" value="<?php echo isset($_GET['search_nim']) ? $_GET['search_nim'] : ''; ?>">
       </div>
       <div class="col-md-4 mb-3">
-        <label class="sr-only" for="search_id_fasilitas">ID Fasilitas</label>
-        <input type="text" class="form-control" id="search_id_fasilitas" name="search_id_fasilitas" placeholder="ID Fasilitas" value="<?php echo isset($_GET['search_id_fasilitas']) ? $_GET['search_id_fasilitas'] : ''; ?>">
+        <label class="sr-only" for="search_fasilitas">Nama Fasilitas</label>
+        <input type="text" class="form-control" id="search_fasilitas" name="search_fasilitas" placeholder="Nama Fasilitas" value="<?php echo isset($_GET['search_fasilitas']) ? $_GET['search_fasilitas'] : ''; ?>">
       </div>
     <button type="submit" class="btn btn-primary btn-block col-md-1 mb-3" id="btn">Search</button>
     </div>
@@ -59,7 +59,7 @@
     $valid_sort_columns = [
       'id_pinjam' => 'id_pinjam',
       'nim' => 'nim',
-      'id_fasilitas' => 'id_fasilitas',
+      'fasilitas' => 'nama_fasilitas',
       'tgl_pinjam' => 'tgl_pinjam',
       'tgl_pengajuan' => 'tgl_pengajuan'
     ];
@@ -70,14 +70,14 @@
 
     $search_id = isset($_GET['search_id']) ? mysqli_real_escape_string($conn, $_GET['search_id']) : '';
     $search_nim = isset($_GET['search_nim']) ? mysqli_real_escape_string($conn, $_GET['search_nim']) : '';
-    $search_id_fasilitas = isset($_GET['search_id_fasilitas']) ? mysqli_real_escape_string($conn, $_GET['search_id_fasilitas']) : '';
+    $search_fasilitas = isset($_GET['search_fasilitas']) ? mysqli_real_escape_string($conn, $_GET['search_fasilitas']) : '';
 
-    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan
+    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas
               FROM peminjaman p
               JOIN fasilitas f ON p.id_fasilitas = f.id_fasilitas
               WHERE (p.id_pinjam LIKE '%$search_id%') 
                 AND (p.nim LIKE '%$search_nim%') 
-                AND (f.id_fasilitas LIKE '%$search_id_fasilitas%')
+                AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
               ORDER BY {$valid_sort_columns[$sort_column]} $sort_order";
     $result = mysqli_query($conn, $query);
     if(!$result){
@@ -103,7 +103,7 @@
       </th>
       <th>
         <a href="?sort=id_fasilitas&order=<?php echo ($sort_column == 'id_fasilitas' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
-          ID Fasilitas 
+          Nama Fasilitas 
           <i class="fas fa-caret-<?php echo ($sort_column == 'id_fasilitas' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
         </a>
       </th>
@@ -130,17 +130,19 @@
         $raw_date_pengajuan = strtotime($data["tgl_pengajuan"]);
         $date_pengajuan = date("d - m - Y", $raw_date_pengajuan);
 
+        $nama_fasilitas = $data['nama_fasilitas'];
+
         echo "<tr>";
         echo "<th scope=\"row\">$i</th>";
         echo "<td>$data[id_pinjam]</td>";
         echo "<td>$data[nim]</td>";
-        echo "<td>$data[id_fasilitas]</td>";
+        echo "<td>$nama_fasilitas</td>";
         echo "<td>$date_pinjam</td>";
         echo "<td>$date_pengajuan</td>";
         echo "<td class=\"text-center\">";
         echo "<form action=\"./detailPeminjaman.php\" method=\"post\" class=\"d-inline-block mb-2\">";
         echo "<input type=\"hidden\" name=\"id_pinjam\" value=\"$data[id_pinjam]\">";
-        echo "<input type=\"submit\" name=\"submit\" value=\"Detail\" class=\"btn btn-info text-white\">";
+        echo "<input type=\"submit\" name=\"submit\" value=\"Detail\" class=\"submit\">";
         echo "</form>";
         echo "</td>";
         echo "</tr>";
