@@ -140,6 +140,11 @@
     background: #208aae;
     border: 0;
   }
+
+  .btn {
+    background-color: #208aae;
+  }
+
   .btn:hover {
     color: #ffffff;
     background: #222222;
