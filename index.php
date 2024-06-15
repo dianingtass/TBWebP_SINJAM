@@ -1,23 +1,26 @@
 <?php
     include("config.php");
-    $emailErrMhs = $passErrMhs = "";
-    $emailErrAdm = $passErrAdm = "";
+    session_start();
+
+    $usernameErrMhs = $passErrMhs = "";
+    $usernameErrAdm = $passErrAdm = "";
 
     if (isset($_POST["loginMhs"])) {
-        $email = htmlentities(strip_tags(trim($_POST["email-mhs"])));
+        $username = htmlentities(strip_tags(trim($_POST["username-mhs"])));
         $password = htmlentities(strip_tags(trim($_POST["password-mhs"])));
 
-        if (empty($email)) {
-            $emailErrMhs = "Email masih kosong. Mohon isi terlebih dahulu!";
+        if (empty($username)) {
+            $usernameErrMhs = "Email/ NIM masih kosong. Mohon isi terlebih dahulu!";
         }
         else {
-            $queryEmail = "SELECT * FROM mahasiswa WHERE email='$email'";
-            $resultEmail = mysqli_query($conn, $queryEmail);
+            $query = "SELECT * FROM mahasiswa WHERE email='$username' OR nim='$username'";
+            $result = mysqli_query($conn, $query);
 
-            if (mysqli_num_rows($resultEmail) > 0) {
-                $row = mysqli_fetch_assoc($resultEmail);
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
 
                 if($password == $row['password']) {
+                    $_SESSION['nim'] = $row['nim'];
                     header("Location: dashboard.php");
                     exit();
                 }
@@ -26,24 +29,24 @@
                 }
             }
             else {
-                $emailErrMhs = "Email belum terdaftar!";
+                $usernameErrMhs = "Email/ NIM tidak tersedia!";
             }
         }
     }
 
     if (isset($_POST["loginAdm"])) {
-        $email = htmlentities(strip_tags(trim($_POST["email-adm"])));
+        $username = htmlentities(strip_tags(trim($_POST["username-adm"])));
         $password = htmlentities(strip_tags(trim($_POST["password-adm"])));
 
-        if (empty($email)) {
-            $emailErrAdm = "Email masih kosong. Mohon isi terlebih dahulu!";
+        if (empty($username)) {
+            $usernameErrAdm = "Email/ NIP masih kosong. Mohon isi terlebih dahulu!";
         }
         else {
-            $queryEmail = "SELECT * FROM adminupn WHERE email='$email'";
-            $resultEmail = mysqli_query($conn, $queryEmail);
+            $query = "SELECT * FROM adminupn WHERE email='$username' OR nip='$username'";
+            $result = mysqli_query($conn, $query);
 
-            if (mysqli_num_rows($resultEmail) > 0) {
-                $row = mysqli_fetch_assoc($resultEmail);
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
 
                 if($password == $row['password']) {
                     header("Location: managePeminjaman.php");
@@ -54,7 +57,7 @@
                 }
             }
             else {
-                $emailErrAdm = "Email salah!";
+                $usernameErrAdm = "Email/ NIP salah!";
             }
         }
     }
@@ -188,8 +191,8 @@
                 </div>
                 <div class="modal-body">
                     <form id="loginFormMhs" method="post" action="" enctype="multipart/form-data">
-                        <label>Email</label>
-                        <input type="email" class="form-control" id="email-mhs" name="email-mhs" placeholder="Masukkan Email">
+                        <label>Username</label>
+                        <input type="text" class="form-control" id="username-mhs" name="username-mhs" placeholder="Email/ NIM">
 
                         <label>Password</label>
                         <input type="password" class="form-control" id="password-mhs" name="password-mhs" placeholder="Password">
@@ -220,8 +223,8 @@
                 </div>
                 <div class="modal-body">
                     <form id="loginFormAdm" method="post" action="" enctype="multipart/form-data">
-                        <label>Email</label>
-                        <input type="email" class="form-control" id="email-adm" name="email-adm" placeholder="Masukkan Email">
+                        <label>Username</label>
+                        <input type="text" class="form-control" id="username-adm" name="username-adm" placeholder="Email/ NIP">
 
                         <label>Password</label>
                         <input type="password" class="form-control" id="password-adm" name="password-adm" placeholder="Password">
@@ -291,26 +294,27 @@
     });
 
     document.addEventListener("DOMContentLoaded", function() {
-        var emailErrMhs = "<?php echo $emailErrMhs; ?>";
+        var usernameErrMhs = "<?php echo $usernameErrMhs; ?>";
         var passErrMhs = "<?php echo $passErrMhs; ?>";
-        var emailErrAdm = "<?php echo $emailErrAdm; ?>";
+        var usernameErrAdm = "<?php echo $usernameErrAdm; ?>";
         var passErrAdm = "<?php echo $passErrAdm; ?>";
 
-        if (emailErrMhs || passErrMhs) {
+        if (usernameErrMhs || passErrMhs) {
             var alertBox = document.getElementById("notifAlertMhs");
-            if (emailErrMhs) {
-                alertBox.textContent = emailErrMhs;
-            } else {
+            if (usernameErrMhs) {
+                alertBox.textContent = usernameErrMhs;
+            } 
+            else {
                 alertBox.textContent = passErrMhs;
             }
             alertBox.style.display = "block";
             $('#loginModalMhs').modal('show');
         }
 
-        if (emailErrAdm || passErrAdm) {
+        if (usernameErrAdm || passErrAdm) {
             var alertBox = document.getElementById("notifAlertAdm");
-            if (emailErrAdm) {
-                alertBox.textContent = emailErrAdm;
+            if (usernameErrAdm) {
+                alertBox.textContent = usernameErrAdm;
             } else {
                 alertBox.textContent = passErrAdm;
             }
