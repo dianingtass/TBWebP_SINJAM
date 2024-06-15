@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2024 at 11:58 AM
+-- Generation Time: Jun 15, 2024 at 07:51 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -140,6 +140,26 @@ INSERT INTO `mahasiswa` (`nim`, `nama`, `email`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pembatalan`
+--
+
+CREATE TABLE `pembatalan` (
+  `id_batal` int(11) NOT NULL,
+  `id_pinjam` int(11) NOT NULL,
+  `nim` varchar(10) NOT NULL,
+  `id_fasilitas` int(11) NOT NULL,
+  `deskripsi` varchar(50) NOT NULL,
+  `tgl_pinjam` date NOT NULL,
+  `tgl_pengajuan` date NOT NULL,
+  `jam_mulai` time NOT NULL,
+  `jam_selesai` time NOT NULL,
+  `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL,
+  `notes` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `peminjaman`
 --
 
@@ -150,7 +170,10 @@ CREATE TABLE `peminjaman` (
   `deskripsi` varchar(50) NOT NULL,
   `tgl_pinjam` date NOT NULL,
   `tgl_pengajuan` date NOT NULL,
-  `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL
+  `jam_mulai` time NOT NULL,
+  `jam_selesai` time NOT NULL,
+  `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL,
+  `notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -194,6 +217,12 @@ ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`nim`);
 
 --
+-- Indexes for table `pembatalan`
+--
+ALTER TABLE `pembatalan`
+  ADD PRIMARY KEY (`id_batal`);
+
+--
 -- Indexes for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
@@ -213,7 +242,7 @@ ALTER TABLE `disposisi`
 -- AUTO_INCREMENT for table `fasilitas`
 --
 ALTER TABLE `fasilitas`
-  MODIFY `id_fasilitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_fasilitas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -226,6 +255,12 @@ ALTER TABLE `feedback`
 --
 ALTER TABLE `kak`
   MODIFY `id_kak` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pembatalan`
+--
+ALTER TABLE `pembatalan`
+  MODIFY `id_batal` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`

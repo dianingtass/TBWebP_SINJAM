@@ -1,3 +1,134 @@
+<?php
+    include("config.php");
+    if (isset($_POST["submit"])) {
+        date_default_timezone_set("Asia/Jakarta");
+        $nim = htmlentities(strip_tags(trim($_POST["c_nim"])));
+        $nama = htmlentities(strip_tags(trim($_POST["c_nama"])));
+        $fasilitas = intval(htmlentities(strip_tags(trim($_POST["c_fasilitas"]))));
+        $deskripsi = "";
+        $tgl_pinjam = htmlentities(strip_tags(trim($_POST["c_tanggal"])));
+        $tgl_pengajuan = date("Y-m-d");
+        $jam_mulai = htmlentities(strip_tags(trim($_POST["c_jamMulai"])));
+        $jam_selesai = htmlentities(strip_tags(trim($_POST["c_jamSelesai"])));
+        $tmp_file = $_FILES['c_kak']['tmp_name'];
+        $nm_file = $_FILES['c_kak']['name'];
+    
+		$tgl_pengajuan1 = new DateTime($tgl_pengajuan);
+        $tgl_pinjam1 = new DateTime($tgl_pinjam);
+        $interval = $tgl_pengajuan1->diff($tgl_pinjam1);
+        $selisih_hari = $interval->days;
+        
+        // Jika selisih hari kurang dari 10 hari, tampilkan pesan kesalahan
+		$queryNim = "SELECT nim FROM mahasiswa WHERE nim='$nim'";
+		$resultNim = mysqli_query($conn, $queryNim);
+
+		if (empty($nim)){
+			$nimError = "NIM belum terisi. Mohon isi terlebih dahulu.";
+		}else{
+			if (mysqli_num_rows($resultNim) > 0) {
+				while ($row = mysqli_fetch_assoc($resultNim)) {
+				}
+			} else {
+				$nimError = "NIM tidak valid. Mohon masukkan NIM yang sesuai.";
+			}
+		}
+
+		$queryNama = "SELECT nama FROM mahasiswa WHERE nim='$nim'";
+		$resultNama = mysqli_query($conn, $queryNama);
+
+		if (empty($nama)){
+			$namaError = "Nama belum terisi. Mohon isi terlebih dahulu.";
+		}else {
+			if (mysqli_num_rows($resultNama) > 0) {
+				$row = mysqli_fetch_assoc($resultNama);
+				$nama_database = $row['nama']; // Ambil nilai 'nama' dari database
+		
+				// Bandingkan nilai dari database dengan variabel $nama
+				if (!($nama === $nama_database)) {
+					$namaError = "Nama tidak sesuai dengan profil NIM. Mohon masukkan nama yang sesuai.";
+				}
+			}
+		}
+
+        if (empty($fasilitas)){
+			$fasilitasError = "Fasilitas belum dipilih. Mohon pilih terlebih dahulu.";
+		}
+
+        if (empty($tgl_pinjam)){
+			$hariError = "Tanggal peminjaman belum terisi. Mohon isi terlebih dahulu.";
+		}
+		else if ($selisih_hari < 10) {
+            $hariError = "Pengajuan harus dilakukan minimal 10 hari sebelum peminjaman. Mohon ubah tanggal peminjaman.";
+        }
+
+        if (empty($jam_mulai) || empty($jam_selesai)) {
+            $jamError = "Jam penggunaan belum terisi lengkap. Mohon isi terlebih dahulu.";
+        }else{
+			$jam_awal = new DateTime('08:00');
+			$jam_akhir = new DateTime('16:00');
+
+			$jam_mulai_obj = DateTime::createFromFormat('H:i', $jam_mulai);
+			$jam_selesai_obj = DateTime::createFromFormat('H:i', $jam_selesai);
+
+			// Membandingkan waktu
+			if (($jam_mulai_obj < $jam_awal) || ($jam_selesai_obj > $jam_akhir)) {
+				$jamError = "Peminjaman hanya dibatasi dari jam <b>08.00</b> s/d <b>16.00</b>. Mohon ubah jam peminjaman.";
+			}
+		}
+
+        if (empty($nm_file)) {
+            $kakError = "Kerangka Acuan Kerja (KAK) Belum Di-Upload. Mohon Upload Terlebih Dahulu.";
+        }
+
+		else {
+			if(isset($_POST["fiklab-201"])){
+				$tmp = htmlentities(strip_tags(trim($_POST["fiklab-201"])));
+				if($tmp == "1"){
+					$deskripsi .= "201";
+				}
+			}
+			if(isset($_POST["fiklab-202"])){
+				$tmp = htmlentities(strip_tags(trim($_POST["fiklab-202"])));
+				if($tmp == "2"){
+					$deskripsi .= ", 202";
+				}
+			}
+			if(isset($_POST["fiklab-203"])){
+				$tmp = htmlentities(strip_tags(trim($_POST["fiklab-203"])));
+				if($tmp == "3"){
+					$deskripsi .= ", 203";
+				}
+			}
+			if (substr($deskripsi, 0, 2) == ", ") {
+				$deskripsi = substr($deskripsi, 2);
+			}
+	
+			if ($nm_file) {
+				$dir = "KAK/" . $nm_file;
+				move_uploaded_file($tmp_file, $dir);
+				$sql_peminjaman = "INSERT INTO peminjaman(nim, id_fasilitas, deskripsi, tgl_pinjam, tgl_pengajuan, jam_mulai, jam_selesai, status) VALUES ('$nim', $fasilitas, '$deskripsi', '$tgl_pinjam', '$tgl_pengajuan', '$jam_mulai', '$jam_selesai', 1)";
+				$queryPinjam = mysqli_query($conn, $sql_peminjaman) or die(mysqli_error($conn));
+	
+				if ($queryPinjam) {
+					$idPinjam = "SELECT id_pinjam FROM peminjaman WHERE nim='$nim' AND id_fasilitas='$fasilitas' AND tgl_pengajuan='$tgl_pengajuan' LIMIT 1";
+					$query = mysqli_query($conn, $idPinjam);
+					if ($query && $row = mysqli_fetch_assoc($query)) {
+						$id_pinjam = $row['id_pinjam'];
+						$sql_kak = "INSERT INTO kak (id_pinjam, file, tgl_upload) VALUES ('$id_pinjam', '$nm_file', '$tgl_pengajuan')";
+						$query_kak = mysqli_query($conn, $sql_kak);
+					}
+				}
+				$accMessage = "";
+				if ($queryPinjam) {
+					$accMessage = "Terima Kasih! Pengajuan Anda Telah Selesai.";
+				} else {
+					die ("Query Error: " . mysqli_errno($conn) . " - " . mysqli_error($conn));
+				}
+			}
+		}
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,44 +149,44 @@
 	</head>
 
 	<body>
-
-		<!-- Start Header/Navigation -->
-		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
-
-			<div class="container">
-				<a class="navbar-brand" href="index.html">SINJAM<span>UPNVJ</span></a>
-
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarsFurni">
-					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-						<li><a class="nav-link" href="fasilitas.php">Fasilitas</a></li>
-						<li><a class="nav-link" href="cekKetersediaan.php">Jadwal</a></li>
-						<li><a class="nav-link" href="formPeminjaman.php">Peminjaman</a></li>
-						<li><a class="nav-link" href="feedback.php">Feedback</a></li>
-						<li><a class="nav-link" href="FAQ.php">FAQ</a></li>
-					</ul>
-
-					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-						<li><a class="nav-link" href="profile.php"><i class="fa-regular fa-user"></i></a></li>
-					</ul>
-				</div>
-			</div>	
-		</nav>
-        <br><br><br>
-		<!-- End Header/Navigation -->
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/tiny-slider.js"></script>
+		<script src="js/custom.js"></script>
+		<?php include "navbar.php" ?>
 
 		<div class="untree_co-section">
 		    <div class="container">
+				<?php if (!empty($accMessage)): ?>
+				  <div id="notifAlert"  class="alert alert-success"><?php echo $accMessage; ?></div>
+			  	<?php endif; ?>
+
+				<?php if (!empty($nimError)): ?>
+				  <div id="notifAlert" class="alert alert-danger"><?php echo $nimError; ?></div>
+			  	<?php endif; ?>
+				<?php if (!empty($namaError)): ?>
+				  <div id="notifAlert" class="alert alert-danger"><?php echo $namaError; ?></div>
+			  	<?php endif; ?>
+				<?php if (!empty($fasilitasError)): ?>
+				  <div id="notifAlert" class="alert alert-danger"><?php echo $fasilitasError; ?></div>
+			  	<?php endif; ?>
+				<?php if (!empty($hariError)): ?>
+				  <div id="notifAlert" class="alert alert-danger"><?php echo $hariError; ?></div>
+			  	<?php endif; ?>
+				<?php if (!empty($jamError)): ?>
+				  <div id="notifAlert" class="alert alert-danger"><?php echo $jamError; ?></div>
+			  	<?php endif; ?>
+				<?php if (!empty($kakError)): ?>
+				  <div id="notifAlert" class="alert alert-danger"><?php echo $kakError; ?></div>
+			  	<?php endif; ?>
+
                 <form method="post" action="" enctype="multipart/form-data">
 		          <h1 class="h3 mb-3 text-black">Form Peminjaman</h1>
 		          <div class="p-3 p-lg-5 border bg-white">
 
+
 		            <div class="form-group">
 		              <label for="c_nim" class="text-black">NIM <span class="text-danger">*</span></label>
-		              <input type="text" class="form-control" id="c_nim" name="c_nim" value="<?php echo (isset($nim)) ? $nim : ""; ?>">
+		              <input type="text" class="form-control" id="c_nim" name="c_nim">
 		            </div>
                     <br>
 		            <div class="form-group">
@@ -111,175 +242,37 @@
 		                <label for="c_tanggal" class="text-black">Tanggal Peminjaman <span class="text-danger">*</span></label>
 		                <input type="date" class="form-control" id="c_tanggal" name="c_tanggal">
 		            </div>
-                    <br>                    
+                    <br>
+					<div class="form-group row">
+		              <div class="col-md-6">
+		                <label for="c_jamMulai" class="text-black">Jam Mulai <span class="text-danger">*</span></label>
+		                <input type="time" class="form-control" id="c_jamMulai" name="c_jamMulai">
+		              </div>
+		              <div class="col-md-6">
+		                <label for="c_jamSelesai" class="text-black">Jam Selesai <span class="text-danger">*</span></label>
+		                <input type="time" class="form-control" id="c_jamSelesai" name="c_jamSelesai">
+		              </div>
+		            </div>
+					<br>
 		            <div class="form-group">
 		                <label for="c_kak" class="text-black">Kerangka Acuan Kerja (KAK) <span class="text-danger">*</span></label>
 		                <input type="file" class="form-control" id="c_kak" name="c_kak" accept=".doc, .docx, .pdf">
-		            </div>
-                    <br>
+						<table width="100%">
+							<tr>
+								<td><span class="text-danger" style="margin-left:1rem;">*</span><i>(.doc, .docx, .pdf)</i></td>
+								<td style="float:right">Belum memiliki <i>template</i> KAK? <a class="unduhKAK" href="KAK/Template-KAK.docx" download="Template-KAK.docx"><b>Unduh Disini</b></a></td>
+							</tr>
+						</table>
+					</div>
+				<br>
                     <div>
                         <input id="submit" type="submit" name="submit" value="Submit" class="submit">
                     </div>
                 </form>
-		      <!-- </form> -->
 		    </div>
 	    </div>
 
-          <br><br><br>
-
-		<!-- Start Footer Section -->
-		<footer class="footer-section">
-			<div class="container relative">
-				<div class="row">
-					<div class="col-lg-8">
-						<div class="subscription-form">
-							<h3 class="d-flex align-items-center"><span class="me-1"><img src="images/envelope-outline.svg" alt="Image" class="img-fluid"></span><span>Subscribe to Newsletter</span></h3>
-
-							<form action="#" class="row g-3">
-								<div class="col-auto">
-									<input type="text" class="form-control" placeholder="Enter your name">
-								</div>
-								<div class="col-auto">
-									<input type="email" class="form-control" placeholder="Enter your email">
-								</div>
-								<div class="col-auto">
-									<button class="btn btn-primary">
-										<span class="fa fa-paper-plane"></span>
-									</button>
-								</div>
-							</form>
-
-						</div>
-					</div>
-				</div>
-
-				<div class="row g-5 mb-5">
-					<div class="col-lg-4">
-						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Furni<span>.</span></a></div>
-						<p class="mb-4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant</p>
-
-						<ul class="list-unstyled custom-social">
-							<li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
-							<li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
-							<li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
-							<li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
-						</ul>
-					</div>
-
-					<div class="col-lg-8">
-						<div class="row links-wrap">
-							<div class="col-6 col-sm-6 col-md-3">
-								<ul class="list-unstyled">
-									<li><a href="#">About us</a></li>
-									<li><a href="#">Services</a></li>
-									<li><a href="#">Blog</a></li>
-									<li><a href="#">Contact us</a></li>
-								</ul>
-							</div>
-
-							<div class="col-6 col-sm-6 col-md-3">
-								<ul class="list-unstyled">
-									<li><a href="#">Support</a></li>
-									<li><a href="#">Knowledge base</a></li>
-									<li><a href="#">Live chat</a></li>
-								</ul>
-							</div>
-
-							<div class="col-6 col-sm-6 col-md-3">
-								<ul class="list-unstyled">
-									<li><a href="#">Jobs</a></li>
-									<li><a href="#">Our team</a></li>
-									<li><a href="#">Leadership</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-								</ul>
-							</div>
-
-							<div class="col-6 col-sm-6 col-md-3">
-								<ul class="list-unstyled">
-									<li><a href="#">Nordic Chair</a></li>
-									<li><a href="#">Kruzo Aero</a></li>
-									<li><a href="#">Ergonomic Chair</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="border-top copyright">
-					<div class="row pt-4">
-						<div class="col-lg-6">
-							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> <!-- License information: https://untree.co/license/ -->
-            </p>
-						</div>
-
-						<div class="col-lg-6 text-center text-lg-end">
-							<ul class="list-unstyled d-inline-flex ms-auto">
-								<li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-							</ul>
-						</div>
-
-					</div>
-				</div>
-
-			</div>
-		</footer>
-		<!-- End Footer Section -->	
-
-
-		<script src="js/bootstrap.bundle.min.js"></script>
-		<script src="js/tiny-slider.js"></script>
-		<script src="js/custom.js"></script>
+        <br><br><br>
+		<?php include "footer.php" ?>
 	</body>
 </html>
-
-<?php
-    include("config.php");
-    if (isset($_POST["submit"])) {
-        date_default_timezone_set("Asia/Jakarta");
-        $nim = htmlentities(strip_tags(trim($_POST["c_nim"])));
-        $fasilitas = intval(htmlentities(strip_tags(trim($_POST["c_fasilitas"]))));
-        $deskripsi = "";
-        $tgl_pinjam = htmlentities(strip_tags(trim($_POST["c_tanggal"])));
-        $tgl_pengajuan = date("Y-m-d");
-        $tmp_file = $_FILES['c_kak']['tmp_name'];
-        $nm_file = $_FILES['c_kak']['name'];
-    
-        if($fasilitas == "1"){
-            $tmp = htmlentities(strip_tags(trim($_POST["fiklab-201"])));
-            if($tmp == "1"){
-                $deskripsi .= "201";
-            }
-            $tmp = htmlentities(strip_tags(trim($_POST["fiklab-202"])));
-            if($tmp == "2"){
-                $deskripsi .= ", 202";
-            }
-            $tmp = htmlentities(strip_tags(trim($_POST["fiklab-203"])));
-            if($tmp == "3"){
-                $deskripsi .= ", 203";
-            }
-            $first2 = substr($deskripsi, 0, 2);
-            if($first2 == ", "){
-                $deskripsi = substr($deskripsi, 2, strlen($deskripsi));
-            }
-        }
-
-        if ($nm_file) {
-            $dir = "KAK/" . $nm_file;
-            move_uploaded_file($tmp_file, $dir);
-            $sql_peminjaman = "INSERT INTO peminjaman(nim, id_fasilitas, deskripsi, tgl_pinjam, tgl_pengajuan, status) VALUES ('$nim', $fasilitas, '$deskripsi', '$tgl_pinjam', '$tgl_pengajuan', 1)";
-            $queryPinjam = mysqli_query($conn, $sql_peminjaman) or die(mysqli_error($conn));
-
-            if ($queryPinjam) {
-                $idPinjam = "SELECT id_pinjam FROM peminjaman WHERE nim='$nim' AND id_fasilitas='$fasilitas' AND tgl_pengajuan='$tgl_pengajuan' LIMIT 1";
-                $query = mysqli_query($conn, $idPinjam);
-                if ($query && $row = mysqli_fetch_assoc($query)) {
-                    $id_pinjam = $row['id_pinjam'];
-                    $sql_kak = "INSERT INTO kak (id_pinjam, file, tgl_upload) VALUES ('$id_pinjam', '$nm_file', '$tgl_pengajuan')";
-                    $query_kak = mysqli_query($conn, $sql_kak);
-                }
-            }
-        }
-    }
-?>
