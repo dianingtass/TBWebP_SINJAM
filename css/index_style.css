@@ -1,5 +1,7 @@
 * {
     font-family: 'Open Sans';
+    padding: 0;
+    margin: 0;
 }
 @media screen and (max-width: 1060px) {
     #primary {width: 67%;}
@@ -23,7 +25,8 @@
 }
 a.navbar-brand {
     float: left;
-    padding: 10px 0px 10px 78px;
+    margin-left: 90px;
+    padding: 10px;
     font-size: 32px;
     color: #FFFFFF;
     font-weight: 600;
@@ -38,7 +41,7 @@ a.navbar-brand:hover {
     color: #FFFFFF;
 }
 .navbar-collapse {
-    padding: 10px 50px 10px 0px;
+    padding-right: 50px;
 }
 .nav-item a {
     font-size: 20px;
@@ -188,22 +191,22 @@ hr {
     font-size: 15px;
     border-radius: 8px;
 }
-.modal-footer input {
-    margin-top: 20px;
+.modal-body form .modal-footer input[type="submit"] {
+    margin-top: 20px;   
     font-size: 18px;
     font-weight: 500;
     color: #ffffff;
     background-color: #208AAE;
-    width: 60%;
+    width: 70%;
     height: 40px;
     font-family: 'Gotham';
+    margin-bottom: 0;
 }
 .login-admin {
     text-align: center;
     padding-bottom: 20px;
 }
 .login-admin h4 a{
-    padding-top: 20px;
     text-decoration: none;
     color: #208AAE;
     font-size: 18px;
@@ -215,26 +218,27 @@ hr {
 
 /* FOOTER */
 .footer-section {
-    padding: 30px 0;
-    background: #ffffff;
-    background-color: #208aae0a;
+    padding: 50px 0 12px;
+    background: #eef6f8;
     font-family: 'Gotham';
-}
+  }
 .footer-section .relative {
     position: relative;
 }
 .footer-section a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: #2f2f2f;
     -webkit-transition: .3s all ease;
-    -o-transition: .3s all ease;
-    transition: .3s all ease; 
+    -o-transition: .3s all ease; 
+    transition: .3s all ease;
+    font-family: 'Gotham';
 }
 .footer-section a:hover {
     color: #208aae; 
 }
 .footer-section .relative ul li {
-    margin-bottom: 10px; 
+    font-family: 'Gotham';
+    margin-bottom: 10px;
 }
 .footer-section .footer-h1 {
     font-size: 20px;
@@ -244,15 +248,17 @@ hr {
 }
 .footer-section .border-top {
     border-color: #dce5e4; 
-    margin-top: 20px;
     display: flex;
-    
 }    
 .footer-section .border-top.copyright {
     font-size: 14px !important;
+    font-family: 'Gotham' !important;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center; 
     padding: 10px 0;
+}
+.border-top.copyright p {
+    font-family: 'Gotham';
 }
