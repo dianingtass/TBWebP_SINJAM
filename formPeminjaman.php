@@ -22,6 +22,8 @@
 		$queryNim = "SELECT nim FROM mahasiswa WHERE nim='$nim'";
 		$resultNim = mysqli_query($conn, $queryNim);
 
+		$nimError = $namaError = $fasilitasError = $hariError = $jamError = $kakError = "";
+
 		if (empty($nim)){
 			$nimError = "NIM belum terisi. Mohon isi terlebih dahulu.";
 		}else{
@@ -80,7 +82,7 @@
             $kakError = "Kerangka Acuan Kerja (KAK) Belum Di-Upload. Mohon Upload Terlebih Dahulu.";
         }
 
-		else {
+		if (empty($nimError) && empty($namaError) && empty($fasilitasError) && empty($hariError) && empty($jamError) && empty($kakError)) {
 			if(isset($_POST["fiklab-201"])){
 				$tmp = htmlentities(strip_tags(trim($_POST["fiklab-201"])));
 				if($tmp == "1"){
