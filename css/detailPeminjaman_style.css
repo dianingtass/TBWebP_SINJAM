@@ -157,3 +157,13 @@
   body {
     font-family: "Open Sans";
   }
+  
+  @media (max-width: 768px) {
+    .logo-link {
+      display: block;
+    }
+    .logo-link span {
+      display: block;
+      margin-top: -10px;
+    }
+  }

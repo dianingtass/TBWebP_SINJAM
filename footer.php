@@ -5,6 +5,7 @@
   <link rel="shortcut icon" href="favicon.png">
   <meta name="description" content="" />
   <meta name="keywords" content="bootstrap, bootstrap4" />
+  
 	<!-- Bootstrap CSS -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 	<link href="css/tiny-slider.css" rel="stylesheet">
@@ -15,7 +16,7 @@
 	<div class="container relative">
     <div class="row">
       <div class="col-4 mt-5">
-        <a href="dashboard.php" style="font-weight: 650; font-size: 32px; color:#208aae">SINJAM<span style="font-weight:100; color: black;">UPNVJ</span></a>
+        <a href="dashboard.php" style="font-weight: 650; font-size: 32px; color:#208aae" class="logo-link">SINJAM<span style="font-weight:100; color: black;">UPNVJ</span></a>
       </div>
       <div class="col-4">
         <div class="mb-4 footer-h1">Menu</div>
@@ -81,4 +82,14 @@
     
   .footer-section .border-top.copyright {
     font-size: 14px !important; }
+
+    @media (max-width: 768px) {
+    .logo-link {
+      display: block;
+    }
+    .logo-link span {
+      display: block;
+      margin-top: -10px;
+    }
+  }
 </style>

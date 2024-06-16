@@ -161,3 +161,13 @@ th a{
   background-color: #208aae;
   width: 7.5%;
 }
+
+@media (max-width: 768px) {
+  .logo-link {
+    display: block;
+  }
+  .logo-link span {
+    display: block;
+    margin-top: -10px;
+  }
+}
