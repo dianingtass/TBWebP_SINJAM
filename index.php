@@ -80,7 +80,7 @@
     <!-- BOOTSTRAP CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>SINJAM</title>
+    <title>SINJAM UPNVJ</title>
 </head>
 <body>
     <!-- NAVIGATION BAR -->
@@ -145,10 +145,11 @@
             <h5>Sistem Informasi Peminjaman yang dikelola oleh<br>Universitas Pembangunan Nasional "Veteran" Jakarta</h5>
             <hr>
             <div class="deskripsi">
-                <p>Tenaga pendidikan dan mahasiswa UPN "Veteran" Jakarta memiliki akses untuk melihat berbagai fasilitas yang ada, 
-                    mengajukan peminjaman fasilitas secara online, memantau status peminjaman, dan mendapatkan notifikasi terkait 
-                    permohonan peminjaman.
+                <p>Seluruh mahasiswa Universitas Pembangunan Nasional "Veteran" Jakarta memiliki akses untuk melihat berbagai 
+                    fasilitas yang ada, mengajukan peminjaman fasilitas secara online, memantau status peminjaman, dan mendapatkan 
+                    notifikasi terkait permohonan peminjaman.
                 </p>
+            </div>
         </div>
     </section>
 
