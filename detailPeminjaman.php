@@ -134,8 +134,7 @@ mysqli_close($conn);
     <h2>Detail Peminjaman Fasilitas Universitas Pembangunan Nasional "Veteran" Jakarta</h2>
     <form method="post" action="detailPeminjaman.php" enctype="multipart/form-data">
         <div class="mb-3">
-            <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>">Download KAK</a>
-        </div>
+            <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>&type=kak">Download KAK</a>        </div>
         <div class="mb-3">
             <label for="id_pinjam" class="form-label">ID Peminjaman</label>
             <input class="form-control" type="text" id="id_pinjam" name="id_pinjam" value="<?php echo htmlspecialchars($id_pinjam); ?>" readonly>
