@@ -11,12 +11,8 @@ th a{
 }
 
 #btn{
+    color: #fff;
     background-color: #208aae;
-}
-
-.btn:hover {
-    color: #ffffff;
-    background: #222222;
 }
 
 h2 {
