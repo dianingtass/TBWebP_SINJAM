@@ -1,3 +1,87 @@
-*{
-    
-}
+    /*
+    * Template Name: UntreeStore
+    * Template Author: Untree.co
+    * Author URI: https://untree.co/
+    * License: https://creativecommons.org/licenses/by/3.0/
+    */
+
+    th a {
+      text-decoration: none !important;
+      color: #212529;
+    }
+
+    #btn {
+      background-color: #208aae;
+      width: 7.5%;
+    }
+
+    .btn:hover {
+      color: #ffffff;
+      background: #222222;
+    }
+
+    h2 {
+      font-family: 'Gotham';
+      text-align: center;
+    }
+
+    body {
+      font-family: "Open Sans" !important;
+    }
+
+    .dropdown-icon::after {
+      content: "\f078";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .dropdown-container {
+      position: relative;
+    }
+
+    .dropdown-container select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    .card-hover {
+      position: relative;
+      overflow: hidden;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .card-hover:hover {
+      background-color: #ffffff;
+      color: #475841;
+    }
+
+    .card-hover .card-description {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #475841;
+      color: white;
+      padding: 10px;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+
+    .card-hover:hover .card-description {
+      transform: translateY(0);
+    }
+
+    .card-img-top {
+      height: 170px;
+      object-fit: cover;
+    }
+
+    .card-title {
+      font-size: 1rem;
+    }
