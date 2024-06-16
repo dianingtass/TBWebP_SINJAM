@@ -20,6 +20,11 @@
 <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
     <div class="container">
       <a class="navbar-brand" href="managePeminjaman.php">SINJAM<span>UPNVJ</span></a>
+      <div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li><a class="nav-link" href="index.php">LOG OUT</a></li>
+					</ul>
+				</div>
     </div>  
 </nav>
 <br><br><br>
@@ -90,31 +95,31 @@
     <tr>
       <th>No.</th>
       <th>
-        <a href="?sort=id_pinjam&order=<?php echo ($sort_column == 'id_pinjam' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
+        <a href="?sort=id_pinjam&order=<?php echo ($sort_column == 'id_pinjam' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
           ID Peminjaman 
           <i class="fas fa-caret-<?php echo ($sort_column == 'id_pinjam' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
         </a>
       </th>
       <th>
-        <a href="?sort=nim&order=<?php echo ($sort_column == 'nim' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
+        <a href="?sort=nim&order=<?php echo ($sort_column == 'nim' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
           NIM 
           <i class="fas fa-caret-<?php echo ($sort_column == 'nim' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
         </a>
       </th>
       <th>
-        <a href="?sort=fasilitas&order=<?php echo ($sort_column == 'fasilitas' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
-          Fasilitas 
-          <i class="fas fa-caret-<?php echo ($sort_column == 'fasilitas' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
+        <a href="?sort=id_fasilitas&order=<?php echo ($sort_column == 'id_fasilitas' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
+          Nama Fasilitas 
+          <i class="fas fa-caret-<?php echo ($sort_column == 'id_fasilitas' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
         </a>
       </th>
       <th>
-        <a href="?sort=tgl_pinjam&order=<?php echo ($sort_column == 'tgl_pinjam' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
+        <a href="?sort=tgl_pinjam&order=<?php echo ($sort_column == 'tgl_pinjam' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
           Tanggal Peminjaman 
           <i class="fas fa-caret-<?php echo ($sort_column == 'tgl_pinjam' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
         </a>
       </th>
       <th>
-        <a href="?sort=tgl_pengajuan&order=<?php echo ($sort_column == 'tgl_pengajuan' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
+        <a href="?sort=tgl_pengajuan&order=<?php echo ($sort_column == 'tgl_pengajuan' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
           Tanggal Pengajuan 
           <i class="fas fa-caret-<?php echo ($sort_column == 'tgl_pengajuan' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
         </a>
@@ -166,6 +171,10 @@
     <div class="row">
       <div class="col-4 mt-5">
         <a href="managePeminjaman.php" style="font-weight: 650; font-size: 32px; color:#208aae">SINJAM<span style="font-weight:100; color: black;">UPNVJ</span></a>
+      </div>
+      <div class="col-4">
+        <div class="mb-4 footer-h1">Menu</div>
+        <p class="mb-2"><a href="index.php">Log Out</a></p>
       </div>
       <div class="col-4">
         <div class="ml-9">
