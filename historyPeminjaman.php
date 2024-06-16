@@ -84,6 +84,7 @@ $result = mysqli_query($conn, $query);
                 AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
                 AND (nim = '$nim')
                 AND (tgl_pinjam < CURDATE())
+                AND (p.status = 'Diterima')
 
               UNION ALL
 
