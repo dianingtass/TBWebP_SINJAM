@@ -7,6 +7,10 @@ content {
     font-size: 35px;
 }
 
+h2{
+    font-size: 32px !important;
+}
+
 .accordion-body {
     font-size: 14px;
 }

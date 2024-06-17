@@ -22,6 +22,7 @@
 }
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+    opacity: .5;
 }
 a.navbar-brand {
     float: left;
@@ -50,11 +51,29 @@ a.navbar-brand:hover {
     display: inline-block;
     font-family: 'Gotham';
 }
-.icon{
+.icon {
     margin-right: 10px;
 }
 .nav-item a:hover {
     color: #0D2149;
+}
+
+/* Adjustments for Mobile View */
+@media (max-width: 768px) {
+    a.navbar-brand {
+        margin-left: 10px !important;
+    }
+    .navbar-collapse {
+        padding-right: 20px;
+    }
+    .nav-item a {
+        font-size: 16px;
+        padding: 10px;
+        margin-left: 2rem;
+    }
+    .navbar-toggler {
+        margin-right: 25px;
+    }
 }
 
 /* CAROUSEL */
@@ -150,6 +169,19 @@ hr {
         flex: 1 1 calc(50% - 30px);
         max-width: calc(50% - 30px);
     }
+    .logo-link {
+        display: block;
+    }
+    .logo-link span {
+        display: block;
+        margin-top: -10px;
+    }
+    .footer-section, .border-top p{
+        font-size: 13px;
+    }
+    .footer-h1{
+        font-size: 14px !important;
+    }
 }
 @media (max-width: 576px) {
     .card {
@@ -226,10 +258,6 @@ hr {
     background: #eef6f8;
     font-family: 'Gotham';
   }
-.footer-section .relative {
-    position: relative;
-    margin-left: 85px;
-}
 .footer-section a {
     text-decoration: none !important;
     color: #2f2f2f;

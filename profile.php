@@ -62,7 +62,15 @@ if (mysqli_num_rows($result) > 0) {
                                     <h4 class="card-title"><?php echo htmlspecialchars($nama);?></h4>
                                     <p class="card-text"><?php echo htmlspecialchars($nim); ?></p>
                                     
-                                    <p class="card-text"><small class="text-body-secondary"><?php echo htmlspecialchars($email); ?><br> <?php echo htmlspecialchars($fakultas); ?><br><?php echo htmlspecialchars($program_studi); ?></small><br><br><a href="index.php"><button type="button" class="btn btn-outline-danger">Log Out</button></a>&emsp;<a href="trackingPeminjaman.php"><button class="btn btn-primary" type="submit">Lacak Peminjaman</button></a></p>
+                                    <p class="card-text">
+                                        <small class="text-body-secondary">
+                                            <?php echo htmlspecialchars($email); ?><br>
+                                            <?php echo htmlspecialchars($fakultas); ?><br>
+                                            <?php echo htmlspecialchars($program_studi); ?>
+                                        </small><br><br>
+                                        <a href="index.php"><button type="button" class="btn btn-outline-danger">Log Out</button></a>&emsp;
+                                        <a href="trackingPeminjaman.php"><button class="btn btn-primary" type="submit">Lacak Peminjaman</button></a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

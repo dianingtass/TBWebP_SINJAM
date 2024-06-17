@@ -157,7 +157,7 @@
                     echo "<td>{$date_pinjam}</td>";
                     echo "<td>{$date_pengajuan}</td>";
                     echo "<td>{$data['status']}</td>";
-                    echo "<td><a href='detailPeminjamanMhs.php?id_pinjam={$data['id_pinjam']}' class='btn btn-primary'>Detail</a></td>";
+                    echo "<td><a href='detailPeminjamanMhs.php?id_pinjam={$data['id_pinjam']}' class='btn btn-primary' id='btn'>Detail</a></td>";
                     echo "</tr>";
                     $i++;
                 }

@@ -38,6 +38,9 @@ td{
   color: #208aae !important;
   text-decoration: none;
 }
+.unduhKAK:hover{
+  color: #0D2149 !important;
+}
 
 input{
   background-color: #fff;
@@ -64,16 +67,11 @@ a {
   a.more {
     font-weight: 600; }
 
-.submit {
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: #ffffff;
-  background: #208aae;
-  border: 0; }
+.btn {
+  color: #fff !important;
+  background: #208aae !important;}
   .btn:hover {
-    color: #ffffff;
-    background: #222222;}
+    background: #0D2149 !important;}
 
 .section-title {
   color: #2f2f2f; }

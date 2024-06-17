@@ -43,30 +43,10 @@ if (isset($_POST["submit"])) {
 </head>
 
 <!-- TEMPLATE NAVBAR -->
-<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
-			<div class="container">
-				<a class="navbar-brand" href="dashboard.php">SINJAM<span>UPNVJ</span></a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarsFurni">
-					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-						<li><a class="nav-link" href="fasilitas.php">Fasilitas</a></li>
-						<li><a class="nav-link" href="cekKetersediaan.php">Jadwal</a></li>
-						<li><a class="nav-link" href="formPeminjaman.php">Peminjaman</a></li>
-						<li><a class="nav-link" href="feedback.php">Feedback</a></li>
-						<li><a class="nav-link" href="FAQ.php">FAQ</a></li>
-					</ul>
-					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-						<li><a class="nav-link" href="profile.php"><i class="fa-regular fa-user"></i></a></li>
-					</ul>
-				</div>
-			</div>	
-		</nav>
+<?php include "navbar.php" ?>
     <br><br><br>
 
 <div class="container">
-  <br><br><br>
   <div class="block">
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-8 pb-4">
@@ -101,48 +81,14 @@ if (isset($_POST["submit"])) {
             <label class="text-black" for="feedback" style="padding-top: 20px">Feedback</label>
             <textarea name="feedback" class="form-control" id="feedback" cols="30" rows="5" required></textarea>
           </div>
-          <button type="submit" name="submit" class="submit">Kirim Feedback</button>
+          <button type="submit" name="submit" class="btn btn-primary">Kirim Feedback</button>
         </form>
       </div>
     </div>
   </div>
 </div>
 </body>
-<footer class="footer-section">
-	<div class="container relative">
-    <div class="row">
-      <div class="col-4 mt-5">
-        <a href="dashboard.php" style="font-weight: 650; font-size: 32px; color:#208aae">SINJAM<span style="font-weight:100; color: black;">UPNVJ</span></a>
-      </div>
-      <div class="col-4">
-        <div class="mb-4 footer-h1">Menu</div>
-        <p class="mb-2"><a href="fasilitas.php">Fasilitas</a></p>
-        <p class="mb-2"><a href="cekKetersediaan.php">Jadwal</a></p>
-        <p class="mb-2"><a href="formPeminjaman.php">Peminjaman</a></p>
-        <p class="mb-2"><a href="feedback.php">Feedback</a></p>
-        <p class="mb-2"><a href="FAQ.php">FAQ</a></p>
-      </div>
-      <div class="col-4">
-        <div class="ml-9">
-          <div class="mb-4 footer-h1">Contact</div>
-          <ul class="list-unstyled">
-            <li>Universitas Pembangunan Nasional "Veteran" Jakarta</li>
-            <li>Jl. RS. Fatmawati, Pondok Labu, Jakarta Selatan, DKI Jakarta. 12450.</li>
-            <li>+62 812 3456 7890</li>
-            <li>sinjam@upnvj.ac.id</li>            
-          </ul>
-        </div>
-      <br><br>
-    </div>
-        
-		<div class="border-top copyright">
-			<div class="row mt-3">
-				<div class="col">
-					<p class="mb-2 text-center ">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Sistem Informasi Peminjaman Universitas Pembangunan Nasional "Veteran" Jakarta</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</footer>
+
+<?php include "footer.php" ?>
 
 </html>

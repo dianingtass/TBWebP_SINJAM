@@ -20,7 +20,6 @@ th a{
 #btn{
     background-color: #208aae;
 }
-.btn:hover {
-    color: #ffffff;
-    background: #222222;
+#btn:hover {
+    background: #0D2149;
 }

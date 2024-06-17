@@ -14,6 +14,10 @@ th a{
     background-color: #208aae;
 }
 
+#btn:hover{
+    background-color: #0D2149;
+}
+
 @media (max-width: 768px){
     .container, .form-control, .btn{
         font-size: 13px !important;

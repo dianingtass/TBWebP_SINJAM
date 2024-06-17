@@ -88,7 +88,7 @@
 
     <!-- DETAIL PEMINJAMAN -->
     <div class="container">
-        <h2>Detail Peminjaman Fasilitas Mahasiswa</h2>
+        <h2>Detail Peminjaman Fasilitas</h2>
         <br>
         <form method="post" action="detailPeminjamanMhs.php" enctype="multipart/form-data">
             <div class="mb-3">
@@ -137,22 +137,23 @@
             </div>
             <div class="mb-3">
                 <label for="fileKAK" class="form-label">File KAK</label><br>
-                <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>&type=kak">Lihat KAK</a>
+                <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>&type=kak"><b>Lihat KAK</b></a>
             </div>
 
             <!-- DETAIL JIKA SUDAH DI ACC -->
             <?php if ($status == 'Diterima') : ?>
                 <div class="mb-3">
                     <label for="fileDisposisi" class="form-label">File Disposisi</label><br>
-                    <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>&type=disposisi">Unduh Disposisi</a>
+                    <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>&type=disposisi"><b>Unduh Disposisi</b></a>
                 </div>
                 <div class="mb-3">
                     <label for="notes" class="form-label">Notes</label>
                     <input class="form-control" type="text" id="notes" value="<?php echo htmlspecialchars($notes); ?>" readonly>
                 </div>
             <?php endif; ?>
-
-            <a href="trackingPeminjaman.php" class="btn btn-primary">Kembali</a>
+            
+            <br>
+            <a href="trackingPeminjaman.php" class="btn btn-primary" id="btn">Kembali</a>
             <button type="button" name="batal" class="btn btn-secondary" onclick="showBatalNotes()">Batalkan Pengajuan</button>
         
             <!-- PEMBATALAN PENGAJUAN -->
@@ -167,7 +168,7 @@
     </div>
 
     <!-- FOOTER -->
-    <br><br><br>
+    <br><br>
     <?php include "footer.php" ?>
 
     <script>

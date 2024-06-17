@@ -249,7 +249,7 @@
 		<div class="container relative">
             <div class="row">
                 <div class="col-4 mt-5">
-                    <a href="index.php" style="font-weight: 650; font-size: 32px; color:#208aae; font-family: 'Gotham';">SINJAM<span style="font-weight:100; color: black; font-family: 'Gotham';">UPNVJ</span></a>
+                    <a href="index.php" style="font-weight: 650; font-size: 32px; color:#208aae; font-family: 'Gotham';" class="logo-link">SINJAM<span style="font-weight:100; color: black; font-family: 'Gotham';">UPNVJ</span></a>
                 </div>
                 
                 <div class="col-4">

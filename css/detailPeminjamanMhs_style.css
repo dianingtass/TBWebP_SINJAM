@@ -13,14 +13,14 @@ body {
 h2 {
     font-family: 'Gotham';
 }
-th a{
-    text-decoration: none !important;
-    color: #212529;
+
+.mb-3 a{
+    color: #208aae;
 }
+
 #btn{
     background-color: #208aae;
 }
-.btn:hover {
-    color: #ffffff;
-    background: #222222;
+#btn:hover {
+    background: #0D2149;
 }

@@ -203,8 +203,8 @@
                             <option value="1">FIKLAB</option>    
                             <option value="2">Selasar FIK</option>    
                             <option value="3">Ubin Coklat</option>    
-                            <option value="4">Auditorium FK</option>    
-                            <option value="5">Plaza Wahidin</option>    
+                            <option value="4">Auditorium dr. Wahidin</option>    
+                            <option value="5">Auditorium BEJ</option>
                             <option value="6">Auditorium MERCe</option>    
                             <option value="7">Laboratorium Diplomasi</option>    
                             <option value="8">Auditorium Tanah Airku</option>    
@@ -213,8 +213,7 @@
                             <option value="11">Plaza Internet</option>
                             <option value="12">Lapangan Olahraga</option>
                             <option value="13">Aula Serbaguna</option>
-                            <option value="14">Auditorium BEJ</option>
-                            <option value="15">Ruang Sidang FH</option>
+                            <option value="14">Ruang Sidang FH</option>
                         </select>
                         <div id="c_fasilitas_fiklab" style="display: none;" class="form-group">
                             <input type="checkbox" id="fiklab-201" name="fiklab-201" value="1" class="checkbox_fiklab">
@@ -270,7 +269,7 @@
 					</div>
 				<br>
                     <div>
-                        <input id="submit" type="submit" name="submit" value="Submit" class="submit">
+                        <input id="submit" type="submit" name="submit" value="Submit" class="btn">
                     </div>
                 </form>
 		    </div>
