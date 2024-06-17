@@ -19,11 +19,7 @@
       </div>
       <div class="col-4">
         <div class="mb-4 footer-h1">Menu</div>
-        <p class="mb-2"><a href="fasilitas.php">Fasilitas</a></p>
-        <p class="mb-2"><a href="cekKetersediaan.php">Jadwal</a></p>
-        <p class="mb-2"><a href="formPeminjaman.php">Peminjaman</a></p>
-        <p class="mb-2"><a href="feedback.php">Feedback</a></p>
-        <p class="mb-2"><a href="FAQ.php">FAQ</a></p>
+        <p class="mb-2"><a href="index.php">Log Out</a></p>
       </div>
       <div class="col-4">
         <div class="ml-9">
