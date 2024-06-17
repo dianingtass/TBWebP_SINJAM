@@ -83,7 +83,8 @@
               WHERE (p.id_pinjam LIKE '%$search_id%') 
                 AND (p.nim LIKE '%$search_nim%') 
                 AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
-              ORDER BY {$valid_sort_columns[$sort_column]} $sort_order";
+                AND ((p.status = 'Diproses') OR (p.status = 'Diterima' AND p.tgl_pinjam >= CURDATE()))
+                ORDER BY {$valid_sort_columns[$sort_column]} $sort_order";
     $result = mysqli_query($conn, $query);
     if(!$result){
       die("Query Error:".mysqli_errno($conn)." -".mysqli_error($conn));
