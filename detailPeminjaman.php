@@ -9,18 +9,18 @@ if (isset($_POST['submit_status'])) {
     $uploadOk = 1;
 
     if (isset($_FILES['fupload']) && $_FILES['fupload']['error'] == 0) {
-        $target_dir = "uploads/";
+        $target_dir = "disposisi/";
         $file_name = basename($_FILES["fupload"]["name"]);
         $target_file = $target_dir . $file_name;
         $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
         if ($_FILES["fupload"]["size"] > 5000000) {
-            echo "Sorry, your file is too large.";
+            echo "Maaf, file terlalu besar.";
             $uploadOk = 0;
         }
 
         if ($file_type != "pdf" && $file_type != "doc" && $file_type != "docx") {
-            echo "Sorry, only PDF, DOC, & DOCX files are allowed.";
+            echo "Maaf, hanya file berbentuk pdf, doc, dan docx yang diterima.";
             $uploadOk = 0;
         }
 
@@ -32,7 +32,7 @@ if (isset($_POST['submit_status'])) {
                     echo "Error: " . mysqli_error($conn);
                 }
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                echo "Maaf, terdapat kesalahan saat mengupload file.";
                 $uploadOk = 0;
             }
         }
@@ -41,7 +41,7 @@ if (isset($_POST['submit_status'])) {
     if ($uploadOk == 1) {
         $update_query = "UPDATE peminjaman SET status='$new_status', notes='$notes' WHERE id_pinjam='$id_pinjam'";
         if (mysqli_query($conn, $update_query)) {
-            header("Location: detailPeminjaman.php?id_pinjam=" . $id_pinjam);
+            header("Location: managePeminjaman.php");
             exit;
         } else {
             echo "Error: " . mysqli_error($conn);
@@ -120,16 +120,21 @@ mysqli_close($conn);
 <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
     <div class="container">
       <a class="navbar-brand" href="managePeminjaman.php">SINJAM<span>UPNVJ</span></a>
+      <div class="collapse navbar-collapse" id="navbarsFurni">
+					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+						<li><a class="nav-link" href="index.php">LOG OUT</a></li>
+					</ul>
+				</div>
     </div>  
 </nav>
 <br><br><br>
+
 <div class="container">
     <br><br><br>
     <h2>Detail Peminjaman Fasilitas Universitas Pembangunan Nasional "Veteran" Jakarta</h2>
     <form method="post" action="detailPeminjaman.php" enctype="multipart/form-data">
         <div class="mb-3">
-            <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>">Download KAK</a>
-        </div>
+            <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>&type=kak">Download KAK</a>        </div>
         <div class="mb-3">
             <label for="id_pinjam" class="form-label">ID Peminjaman</label>
             <input class="form-control" type="text" id="id_pinjam" name="id_pinjam" value="<?php echo htmlspecialchars($id_pinjam); ?>" readonly>
@@ -142,13 +147,19 @@ mysqli_close($conn);
             <label for="nama_fasilitas" class="form-label">Nama Fasilitas</label>
             <input class="form-control" type="text" id="nama_fasilitas" value="<?php echo htmlspecialchars($nama_fasilitas); ?>" readonly>
         </div>
-        <div class="mb-3">
-            <label for="tgl_pinjam" class="form-label">Tanggal Peminjaman</label>
-            <input class="form-control" type="text" id="tgl_pinjam" value="<?php echo htmlspecialchars($tgl_pinjam); ?>" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="tgl_pengajuan" class="form-label">Tanggal Pengajuan</label>
-            <input class="form-control" type="text" id="tgl_pengajuan" value="<?php echo htmlspecialchars($tgl_pengajuan); ?>" readonly>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="tgl_pinjam" class="form-label">Tanggal Peminjaman</label>
+                    <input class="form-control" type="text" id="tgl_pinjam" value="<?php echo htmlspecialchars($tgl_pinjam); ?>" readonly>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="tgl_pengajuan" class="form-label">Tanggal Pengajuan</label>
+                    <input class="form-control" type="text" id="tgl_pengajuan" value="<?php echo htmlspecialchars($tgl_pengajuan); ?>" readonly>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -183,7 +194,7 @@ mysqli_close($conn);
             <label for="formFile" class="form-label">File Disposisi</label>
             <input class="form-control" type="file" id="fupload" name="fupload">
             <?php if ($disposisi_file): ?>
-                <p>Current file: <a href="uploads/<?php echo htmlspecialchars($disposisi_file); ?>" target="_blank"><?php echo htmlspecialchars($disposisi_file); ?></a></p>
+                <p>Current file: <a href="disposisi/<?php echo htmlspecialchars($disposisi_file); ?>" target="_blank"><?php echo htmlspecialchars($disposisi_file); ?></a></p>
             <?php endif; ?>
         </div>
         <div class="mb-3">
@@ -191,6 +202,7 @@ mysqli_close($conn);
             <textarea class="form-control" id="notes" name="notes" rows="3"><?php echo htmlspecialchars($notes); ?></textarea>
         </div>
         <button type="submit" name="submit_status" class="btn btn-primary">Update Status</button>
+        <button type="button" name="cancel_submit" class="btn btn-secondary" onclick="window.location.href='managePeminjaman.php';">Kembali</button>
     </form>
     <br>
 </div>
@@ -200,12 +212,15 @@ mysqli_close($conn);
 </body>
 
 <footer class="footer-section">
-    <div class="container relative">
+  <div class="container relative">
     <div class="row">
       <div class="col-4 mt-5">
         <a href="managePeminjaman.php" style="font-weight: 650; font-size: 32px; color:#208aae">SINJAM<span style="font-weight:100; color: black;">UPNVJ</span></a>
       </div>
-
+      <div class="col-4">
+        <div class="mb-4 footer-h1">Menu</div>
+        <p class="mb-2"><a href="index.php">Log Out</a></p>
+      </div>
       <div class="col-4">
         <div class="ml-9">
           <div class="mb-4 footer-h1">Contact</div>
@@ -213,20 +228,19 @@ mysqli_close($conn);
             <li>Universitas Pembangunan Nasional "Veteran" Jakarta</li>
             <li>Jl. RS. Fatmawati, Pondok Labu, Jakarta Selatan, DKI Jakarta. 12450.</li>
             <li>+62 812 3456 7890</li>
-            <li>sinjam@upnvj.ac.id</li>
-            
+            <li>sinjam@upnvj.ac.id</li>            
           </ul>
         </div>
       <br><br>
     </div>
         
-        <div class="border-top copyright">
-            <div class="row mt-3">
-                <div class="col">
-                    <p class="mb-2 text-center ">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Sistem Informasi Peminjaman Universitas Pembangunan Nasional "Veteran" Jakarta <!-- License information: https://untree.co/license/ --></p>
-                </div>
-            </div>
+    <div class="border-top copyright">
+      <div class="row mt-3">
+        <div class="col">
+          <p class="mb-2 text-center ">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Sistem Informasi Peminjaman Universitas Pembangunan Nasional "Veteran" Jakarta</p>
         </div>
+      </div>
     </div>
+  </div>
 </footer>
 </html>
