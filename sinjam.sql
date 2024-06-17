@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2024 at 06:25 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jun 17, 2024 at 06:01 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `adminupn` (
   `nama` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `adminupn`
@@ -52,7 +52,7 @@ CREATE TABLE `disposisi` (
   `id_pinjam` int(11) NOT NULL,
   `file` varchar(255) NOT NULL,
   `tgl_publish` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -65,29 +65,29 @@ CREATE TABLE `fasilitas` (
   `nama_fasilitas` varchar(50) NOT NULL,
   `lokasi` enum('pl','limo') NOT NULL,
   `pic` enum('FIK','FISIP','FEB','FK','FT','Rektorat','FH') NOT NULL,
+  `foto` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `fasilitas`
 --
 
-INSERT INTO `fasilitas` (`id_fasilitas`, `nama_fasilitas`, `lokasi`, `pic`, `deskripsi`) VALUES
-(1, 'FIKLAB', 'pl', 'FIK', ''),
-(2, 'Selasar FIK', 'pl', 'FIK', ''),
-(3, 'Ubin Coklat', 'pl', 'FEB', ''),
-(4, 'Auditorium dr. Wahidin', 'pl', 'FK', ''),
-(5, 'Plaza Wahidin', 'pl', 'FK', ''),
-(6, 'Auditorium MERCe', 'limo', 'FK', ''),
-(7, 'Laboratorium Diplomasi', 'pl', 'FISIP', ''),
-(8, 'Auditorium Tanah Airku', 'limo', 'FT', ''),
-(9, 'Auditorium Bhinneka Tunggal Ika', 'pl', 'Rektorat', ''),
-(10, 'Plaza Wardiman', 'pl', 'Rektorat', ''),
-(11, 'Plaza Internet', 'pl', 'Rektorat', ''),
-(12, 'Lapangan Olahraga', 'pl', 'Rektorat', ''),
-(13, 'Aula Serbaguna', 'pl', 'Rektorat', ''),
-(14, 'Auditorium BEJ', 'pl', 'FEB', ''),
-(15, 'Ruang Sidang FH', 'pl', 'FH', '');
+INSERT INTO `fasilitas` (`id_fasilitas`, `nama_fasilitas`, `lokasi`, `pic`, `foto`, `deskripsi`) VALUES
+(1, 'FIKLAB', 'pl', 'FIK', '1.png', ''),
+(2, 'Selasar FIK', 'pl', 'FIK', '2.png', ''),
+(3, 'Ubin Coklat', 'pl', 'FEB', '3.png', ''),
+(4, 'Auditorium dr. Wahidin', 'pl', 'FK', '4.png', ''),
+(5, 'Auditorium BEJ', 'pl', 'FEB', '5.png', ''),
+(6, 'Auditorium MERCe', 'limo', 'FK', '6.png', ''),
+(7, 'Laboratorium Diplomasi', 'pl', 'FISIP', '7.png', ''),
+(8, 'Auditorium Tanah Airku', 'limo', 'FT', '8.png', ''),
+(9, 'Auditorium Bhinneka Tunggal Ika', 'pl', 'Rektorat', '9.png', ''),
+(10, 'Plaza Wardiman', 'pl', 'Rektorat', '10.png', ''),
+(11, 'Plaza Internet', 'pl', 'Rektorat', '11.png', ''),
+(12, 'Lapangan Olahraga', 'pl', 'Rektorat', '12.png', ''),
+(13, 'Aula Serbaguna', 'pl', 'Rektorat', '13.png', ''),
+(14, 'Ruang Sidang FH', 'pl', 'FH', '14.png', '');
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE `feedback` (
   `nama` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `feedback` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,7 @@ CREATE TABLE `kak` (
   `id_pinjam` int(11) NOT NULL,
   `file` varchar(255) NOT NULL,
   `tgl_upload` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -129,7 +129,7 @@ CREATE TABLE `mahasiswa` (
   `fakultas` varchar(50) NOT NULL,
   `email` varchar(32) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `mahasiswa`
@@ -160,7 +160,7 @@ CREATE TABLE `pembatalan` (
   `jam_selesai` time NOT NULL,
   `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL,
   `notes` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -179,7 +179,7 @@ CREATE TABLE `peminjaman` (
   `jam_selesai` time NOT NULL,
   `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL,
   `notes` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables

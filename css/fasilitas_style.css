@@ -10,15 +10,21 @@
       color: #212529;
     }
 
-    #btn {
+    #btn{
       background-color: #208aae;
-      width: 7.5%;
-    }
-
-    .btn:hover {
+  }
+  
+  @media (max-width: 768px){
+      .container, .form-control, .btn{
+          font-size: 13px !important;
+      }
+  }
+  
+  #btn:hover {
       color: #ffffff;
-      background: #222222;
-    }
+      background: #0D2149;
+  }
+  
 
     h2 {
       font-family: 'Gotham';
@@ -31,7 +37,7 @@
 
     .dropdown-icon::after {
       content: "\f078";
-      font-family: "Font Awesome 5 Free";
+      font-family: "Open Sans" !important;
       font-weight: 900;
       position: absolute;
       right: 10px;
@@ -58,7 +64,7 @@
 
     .card-hover:hover {
       background-color: #ffffff;
-      color: #475841;
+      color: #0D2149;
     }
 
     .card-hover .card-description {
@@ -66,7 +72,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: #475841;
+      background: #0D2149;
       color: white;
       padding: 10px;
       transform: translateY(100%);
