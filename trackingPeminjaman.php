@@ -81,7 +81,7 @@
             <input type="hidden" name="order" value="<?php echo isset($sort_order) ? $sort_order : ''; ?>">
 
             <div class="row">
-                <div class="col-md-3 mb-3">
+                <div class="col-md-4 mb-3">
                     <label class="sr-only" for="search_id">ID Peminjaman</label>
                     <input type="text" class="form-control" id="search_id" name="search_id" placeholder="ID Peminjaman" value="<?php echo isset($_GET['search_id']) ? $_GET['search_id'] : ''; ?>">
                 </div>
@@ -91,12 +91,10 @@
                     <input type="text" class="form-control" id="search_fasilitas" name="search_fasilitas" placeholder="Fasilitas" value="<?php echo isset($_GET['search_fasilitas']) ? $_GET['search_fasilitas'] : ''; ?>">
                 </div>
                 
-                <div class="col-md-1 mb-3">
+                <div class="col-md-4 mb-3 d-flex">
                     <button type="submit" class="btn btn-primary btn-block" id="btn">Search</button>
-                </div>
-
-                <div class="col-md-3 mb-3">
-                    <a href="historyPeminjaman.php" class="btn btn-secondary btn-block">Riwayat Peminjaman</a>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp
+                    <a href="historyPeminjaman.php" class="btn btn-secondary">Riwayat Peminjaman</a>
                 </div>
             </div>
         </form>

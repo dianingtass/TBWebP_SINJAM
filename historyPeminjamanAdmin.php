@@ -1,12 +1,3 @@
-<?php
-include "config.php";
-session_start(); // Mulai sesi
-
-$nim = $_SESSION['nim'];
-$query = "SELECT * FROM mahasiswa WHERE nim='$nim'";
-$result = mysqli_query($conn, $query);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +55,7 @@ $result = mysqli_query($conn, $query);
 
     $valid_sort_columns = [
       'id_pinjam' => 'id_pinjam',
+      'nim' => 'nim',
       'fasilitas' => 'nama_fasilitas',
       'tgl_pinjam' => 'tgl_pinjam',
       'tgl_pengajuan' => 'tgl_pengajuan',
@@ -77,14 +69,17 @@ $result = mysqli_query($conn, $query);
     $search_id = isset($_GET['search_id']) ? mysqli_real_escape_string($conn, $_GET['search_id']) : '';
     $search_fasilitas = isset($_GET['search_fasilitas']) ? mysqli_real_escape_string($conn, $_GET['search_fasilitas']) : '';
 
-    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, 'Selesai' AS status 
+    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, 
+              CASE 
+                WHEN p.status = 'Diterima' THEN 'Selesai'
+                WHEN p.status = 'Tidak Diterima' THEN 'Ditolak'
+              END AS status 
               FROM peminjaman p
               JOIN fasilitas f ON p.id_fasilitas = f.id_fasilitas
               WHERE (p.id_pinjam LIKE '%$search_id%')
                 AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
-                AND (nim = '$nim')
                 AND (tgl_pinjam < CURDATE())
-                AND (p.status = 'Diterima')
+                AND (p.status = 'Diterima') OR (p.status = 'Tidak Diterima')
 
               UNION ALL
 
@@ -93,7 +88,6 @@ $result = mysqli_query($conn, $query);
               JOIN fasilitas f ON pb.id_fasilitas = f.id_fasilitas
               WHERE (pb.id_pinjam LIKE '%$search_id%')
                 AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
-                AND (nim = '$nim')
 
               ORDER BY ";
    
@@ -116,6 +110,12 @@ $result = mysqli_query($conn, $query);
           <a href="?sort=id_pinjam&order=<?php echo ($sort_column == 'id_pinjam' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
             ID Peminjaman 
             <i class="fas fa-caret-<?php echo ($sort_column == 'id_pinjam' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
+          </a>
+        </th>
+        <th>
+          <a href="?sort=nim&order=<?php echo ($sort_column == 'nim' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
+            NIM 
+              <i class="fas fa-caret-<?php echo ($sort_column == 'nim' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
           </a>
         </th>
         <th>
@@ -160,6 +160,7 @@ $result = mysqli_query($conn, $query);
           echo "<tr>";
           echo "<th scope=\"row\">$i</th>";
           echo "<td>$data[id_pinjam]</td>";
+          echo "<td>$data[nim]</td>";
           echo "<td>$nama_fasilitas</td>";
           echo "<td>$date_pinjam</td>";
           echo "<td>$date_pengajuan</td>";

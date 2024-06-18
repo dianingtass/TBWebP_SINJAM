@@ -44,7 +44,7 @@
         <button type="submit" class="btn btn-primary btn-block" id="btn">Search</button>
       </div>
       <div class="col-md-3 mb-3">
-        <a href="historyPeminjaman.php" class="btn btn-secondary btn-block">Riwayat Peminjaman</a>
+        <a href="historyPeminjamanAdmin.php" class="btn btn-secondary btn-block">Riwayat Peminjaman</a>
       </div>
     </div>
   </form>
