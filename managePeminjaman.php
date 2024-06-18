@@ -48,6 +48,7 @@
       </div>
     </div>
   </form>
+  <br>
 
   <?php
     include("config.php");
@@ -61,7 +62,8 @@
       'nim' => 'nim',
       'fasilitas' => 'nama_fasilitas',
       'tgl_pinjam' => 'tgl_pinjam',
-      'tgl_pengajuan' => 'tgl_pengajuan'
+      'tgl_pengajuan' => 'tgl_pengajuan',
+      'status' => 'status'
     ];
 
     if (!array_key_exists($sort_column, $valid_sort_columns)) {
@@ -72,13 +74,13 @@
     $search_nim = isset($_GET['search_nim']) ? mysqli_real_escape_string($conn, $_GET['search_nim']) : '';
     $search_fasilitas = isset($_GET['search_fasilitas']) ? mysqli_real_escape_string($conn, $_GET['search_fasilitas']) : '';
 
-    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas
+    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, p.status
               FROM peminjaman p
               JOIN fasilitas f ON p.id_fasilitas = f.id_fasilitas
               WHERE (p.id_pinjam LIKE '%$search_id%') 
                 AND (p.nim LIKE '%$search_nim%') 
                 AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
-                AND ((p.status = 'Diproses') OR (p.status = 'Diterima' AND p.tgl_pinjam >= CURDATE()))
+                AND (p.tgl_pinjam >= CURDATE())
                 ORDER BY {$valid_sort_columns[$sort_column]} $sort_order";
     $result = mysqli_query($conn, $query);
     if(!$result){
@@ -120,6 +122,11 @@
               <i class="fas fa-caret-<?php echo ($sort_column == 'tgl_pengajuan' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
             </a>
           </th>
+          <th>
+          <a href="?sort=status&order=<?php echo ($sort_column == 'status' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
+          Status
+          <i class="fas fa-caret-<?php echo ($sort_column == 'status' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
+          </a>
         </tr>
       </thead>
       <tbody>
@@ -140,6 +147,7 @@
             echo "<td>$nama_fasilitas</td>";
             echo "<td>$date_pinjam</td>";
             echo "<td>$date_pengajuan</td>";
+            echo "<td>$data[status]</td>";
             echo "<td class=\"text-center\">";
             echo "<form action=\"./detailPeminjaman.php\" method=\"post\" class=\"d-inline-block mb-2\">";
             echo "<input type=\"hidden\" name=\"id_pinjam\" value=\"$data[id_pinjam]\">";

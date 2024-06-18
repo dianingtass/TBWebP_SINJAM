@@ -28,7 +28,7 @@
         WHERE (p.nim='$nim') 
         AND (p.id_pinjam LIKE '%$search_id%')
         AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
-        AND ((p.status = 'Diproses') OR (p.status = 'Diterima' AND p.tgl_pinjam >= CURDATE()))
+        AND (p.tgl_pinjam >= CURDATE())
         ORDER BY {$valid_sort_columns[$sort_column]} $sort_order";
     
     $result = mysqli_query($conn, $query);
@@ -133,7 +133,12 @@
                         </a>
                     </th>
 
-                    <th>Status</th>
+                    <th>
+                        <a href="?sort=status&order=<?php echo ($sort_column == 'status' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
+                            Status
+                            <i class="fas fa-caret-<?php echo ($sort_column == 'status' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
+                        </a>
+                    </th>
                     <th>Detail</th>
                 </tr>
             </thead>

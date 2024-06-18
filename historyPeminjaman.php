@@ -77,14 +77,18 @@ $result = mysqli_query($conn, $query);
     $search_id = isset($_GET['search_id']) ? mysqli_real_escape_string($conn, $_GET['search_id']) : '';
     $search_fasilitas = isset($_GET['search_fasilitas']) ? mysqli_real_escape_string($conn, $_GET['search_fasilitas']) : '';
 
-    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, 'Selesai' AS status 
+    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas,
+              CASE 
+                WHEN p.status = 'Diterima' THEN 'Selesai'
+                WHEN p.status = 'Diproses' THEN 'Selesai'
+                WHEN p.status = 'Tidak Diterima' THEN 'Ditolak'
+              END AS status 
               FROM peminjaman p
               JOIN fasilitas f ON p.id_fasilitas = f.id_fasilitas
               WHERE (p.id_pinjam LIKE '%$search_id%')
                 AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
                 AND (nim = '$nim')
                 AND (tgl_pinjam < CURDATE())
-                AND (p.status = 'Diterima')
 
               UNION ALL
 

@@ -72,6 +72,7 @@
     $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, 
               CASE 
                 WHEN p.status = 'Diterima' THEN 'Selesai'
+                WHEN p.status = 'Diproses' THEN 'Selesai'
                 WHEN p.status = 'Tidak Diterima' THEN 'Ditolak'
               END AS status 
               FROM peminjaman p
@@ -79,7 +80,6 @@
               WHERE (p.id_pinjam LIKE '%$search_id%')
                 AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
                 AND (tgl_pinjam < CURDATE())
-                AND (p.status = 'Diterima') OR (p.status = 'Tidak Diterima')
 
               UNION ALL
 
