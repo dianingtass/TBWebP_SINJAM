@@ -104,7 +104,9 @@
                 <label for="nama_fasilitas" class="form-label">Nama Fasilitas</label>
                 <?php
                     $namaFasilitas = $nama_fasilitas;
-                    $namaFasilitas .= " (" . $deskripsi . ")";
+                    if(!empty($deskripsi)){
+                        $namaFasilitas .= " (" . $deskripsi . ")";
+                    }
                 ?>
                 <input class="form-control" type="text" id="nama_fasilitas" value="<?php echo $namaFasilitas; ?>" readonly>
             </div>
