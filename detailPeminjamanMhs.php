@@ -24,6 +24,7 @@
             $tgl_pinjam = date("d - m - Y", strtotime($data['tgl_pinjam']));
             $tgl_pengajuan = date("d - m - Y", strtotime($data['tgl_pengajuan']));
             $jam_mulai = $data['jam_mulai'];
+            $deskripsi = $data['deskripsi'];
             $jam_selesai = $data['jam_selesai'];
             $status = $data['status'];
             $notes = $data['notes'];
@@ -101,7 +102,11 @@
             </div>
             <div class="mb-3">
                 <label for="nama_fasilitas" class="form-label">Nama Fasilitas</label>
-                <input class="form-control" type="text" id="nama_fasilitas" value="<?php echo htmlspecialchars($nama_fasilitas); ?>" readonly>
+                <?php
+                    $namaFasilitas = $nama_fasilitas;
+                    $namaFasilitas .= " (" . $deskripsi . ")";
+                ?>
+                <input class="form-control" type="text" id="nama_fasilitas" value="<?php echo $namaFasilitas; ?>" readonly>
             </div>
             <div class="row">
                 <div class="col-md-6">

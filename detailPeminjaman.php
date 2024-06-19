@@ -77,6 +77,7 @@ if (!empty($id_pinjam)) {
         $jam_mulai = $data['jam_mulai'];
         $jam_selesai = $data['jam_selesai'];
         $status = $data['status'];
+        $deskripsi = $data['deskripsi'];
         $notes = $data['notes'];
     } else {
         echo "Data tidak ditemukan.";
@@ -104,6 +105,7 @@ if (!empty($id_pinjam)) {
 mysqli_close($conn);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,7 +128,6 @@ mysqli_close($conn);
 <?php include "navbarAdmin.php" ?>
 <br><br><br>
 
-
 <div class="container">
     <h2>Detail Peminjaman Fasilitas Universitas Pembangunan Nasional "Veteran" Jakarta</h2>
     <?php if (!empty($disposisiError)): ?>
@@ -145,7 +146,11 @@ mysqli_close($conn);
         </div>
         <div class="mb-3">
             <label for="nama_fasilitas" class="form-label">Nama Fasilitas</label>
-            <input class="form-control" type="text" id="nama_fasilitas" value="<?php echo htmlspecialchars($nama_fasilitas); ?>" readonly>
+            <?php
+                $namaFasilitas = $nama_fasilitas;
+                $namaFasilitas .= " (" . $deskripsi . ")";
+            ?>
+            <input class="form-control" type="text" id="nama_fasilitas" value="<?php echo $namaFasilitas; ?>" readonly>
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -219,7 +224,6 @@ mysqli_close($conn);
             });
         </script>
 
-
         <div class="mb-3">
             <label for="notes" class="form-label">Notes</label>
             <textarea class="form-control" id="notes" name="notes" rows="3"><?php echo htmlspecialchars($notes); ?></textarea>
@@ -230,10 +234,10 @@ mysqli_close($conn);
     <br>
 </div>
 
-<br><br><br>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
 <?php include "footerAdmin.php" ?>
 
 </html>
+
