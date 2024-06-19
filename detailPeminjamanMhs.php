@@ -146,6 +146,8 @@
                     <label for="fileDisposisi" class="form-label">File Disposisi</label><br>
                     <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>&type=disposisi"><b>Unduh Disposisi</b></a>
                 </div>
+            <?php endif; ?>
+            <?php if ($status == 'Tidak Diterima' || $status == 'Diterima') : ?>
                 <div class="mb-3">
                     <label for="notes" class="form-label">Notes</label>
                     <input class="form-control" type="text" id="notes" value="<?php echo htmlspecialchars($notes); ?>" readonly>

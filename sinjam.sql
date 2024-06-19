@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2024 at 06:01 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: Jun 18, 2024 at 11:47 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `adminupn` (
   `nama` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `adminupn`
@@ -52,7 +52,18 @@ CREATE TABLE `disposisi` (
   `id_pinjam` int(11) NOT NULL,
   `file` varchar(255) NOT NULL,
   `tgl_publish` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `disposisi`
+--
+
+INSERT INTO `disposisi` (`id_disposisi`, `id_pinjam`, `file`, `tgl_publish`) VALUES
+(1, 1, 'Pertemuan 12- Pemrograman Web SI.pdf', '2024-06-17'),
+(2, 2, 'Pertemuan 12- Pemrograman Web SI.pdf', '2024-06-17'),
+(3, 11, 'Pertemuan 13- Pemrograman Web SI Kelas B.pdf', '2024-06-18'),
+(4, 11, 'Pertemuan 13- Pemrograman Web SI Kelas B.pdf', '2024-06-18'),
+(5, 14, 'Network_security_basics.pdf', '2024-06-18');
 
 -- --------------------------------------------------------
 
@@ -65,29 +76,28 @@ CREATE TABLE `fasilitas` (
   `nama_fasilitas` varchar(50) NOT NULL,
   `lokasi` enum('pl','limo') NOT NULL,
   `pic` enum('FIK','FISIP','FEB','FK','FT','Rektorat','FH') NOT NULL,
-  `foto` varchar(50) NOT NULL,
-  `deskripsi` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `foto` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `fasilitas`
 --
 
-INSERT INTO `fasilitas` (`id_fasilitas`, `nama_fasilitas`, `lokasi`, `pic`, `foto`, `deskripsi`) VALUES
-(1, 'FIKLAB', 'pl', 'FIK', '1.png', ''),
-(2, 'Selasar FIK', 'pl', 'FIK', '2.png', ''),
-(3, 'Ubin Coklat', 'pl', 'FEB', '3.png', ''),
-(4, 'Auditorium dr. Wahidin', 'pl', 'FK', '4.png', ''),
-(5, 'Auditorium BEJ', 'pl', 'FEB', '5.png', ''),
-(6, 'Auditorium MERCe', 'limo', 'FK', '6.png', ''),
-(7, 'Laboratorium Diplomasi', 'pl', 'FISIP', '7.png', ''),
-(8, 'Auditorium Tanah Airku', 'limo', 'FT', '8.png', ''),
-(9, 'Auditorium Bhinneka Tunggal Ika', 'pl', 'Rektorat', '9.png', ''),
-(10, 'Plaza Wardiman', 'pl', 'Rektorat', '10.png', ''),
-(11, 'Plaza Internet', 'pl', 'Rektorat', '11.png', ''),
-(12, 'Lapangan Olahraga', 'pl', 'Rektorat', '12.png', ''),
-(13, 'Aula Serbaguna', 'pl', 'Rektorat', '13.png', ''),
-(14, 'Ruang Sidang FH', 'pl', 'FH', '14.png', '');
+INSERT INTO `fasilitas` (`id_fasilitas`, `nama_fasilitas`, `lokasi`, `pic`, `foto`) VALUES
+(1, 'FIKLAB', 'pl', 'FIK', '1.png'),
+(2, 'Selasar FIK', 'pl', 'FIK', '2.png'),
+(3, 'Ubin Coklat', 'pl', 'FEB', '3.png'),
+(4, 'Auditorium dr. Wahidin', 'pl', 'FK', '4.png'),
+(5, 'Auditorium BEJ', 'pl', 'FEB', '5.png'),
+(6, 'Auditorium MERCe', 'limo', 'FK', '6.png'),
+(7, 'Laboratorium Diplomasi', 'pl', 'FISIP', '7.png'),
+(8, 'Auditorium Tanah Airku', 'limo', 'FT', '8.png'),
+(9, 'Auditorium Bhinneka Tunggal Ika', 'pl', 'Rektorat', '9.png'),
+(10, 'Plaza Wardiman', 'pl', 'Rektorat', '10.png'),
+(11, 'Plaza Internet', 'pl', 'Rektorat', '11.png'),
+(12, 'Lapangan Olahraga', 'pl', 'Rektorat', '12.png'),
+(13, 'Aula Serbaguna', 'pl', 'Rektorat', '13.png'),
+(14, 'Ruang Sidang FH', 'pl', 'FH', '14.png');
 
 -- --------------------------------------------------------
 
@@ -101,7 +111,7 @@ CREATE TABLE `feedback` (
   `nama` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `feedback` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -114,7 +124,16 @@ CREATE TABLE `kak` (
   `id_pinjam` int(11) NOT NULL,
   `file` varchar(255) NOT NULL,
   `tgl_upload` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kak`
+--
+
+INSERT INTO `kak` (`id_kak`, `id_pinjam`, `file`, `tgl_upload`) VALUES
+(1, 1, 'Pertemuan 13- Pemrograman Web SI Kelas B.pdf', '2024-06-17'),
+(2, 2, 'Pertemuan 12- Pemrograman Web SI.pdf', '2024-06-17'),
+(3, 14, 'Pertemuan 12- Pemrograman Web.pdf', '2024-06-19');
 
 -- --------------------------------------------------------
 
@@ -129,7 +148,7 @@ CREATE TABLE `mahasiswa` (
   `fakultas` varchar(50) NOT NULL,
   `email` varchar(32) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `mahasiswa`
@@ -158,9 +177,16 @@ CREATE TABLE `pembatalan` (
   `tgl_pengajuan` date NOT NULL,
   `jam_mulai` time NOT NULL,
   `jam_selesai` time NOT NULL,
-  `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL,
   `notes` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pembatalan`
+--
+
+INSERT INTO `pembatalan` (`id_batal`, `id_pinjam`, `nim`, `id_fasilitas`, `deskripsi`, `tgl_pinjam`, `tgl_pengajuan`, `jam_mulai`, `jam_selesai`, `notes`) VALUES
+(1, 8, '2210512056', 7, '', '2024-07-10', '2024-06-18', '09:00:00', '12:00:00', ''),
+(2, 9, '2210512056', 8, '', '2024-06-12', '2024-05-16', '09:00:00', '12:00:00', 'Tidak jadi');
 
 -- --------------------------------------------------------
 
@@ -179,7 +205,25 @@ CREATE TABLE `peminjaman` (
   `jam_selesai` time NOT NULL,
   `status` enum('Diproses','Diterima','Tidak Diterima') NOT NULL,
   `notes` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `peminjaman`
+--
+
+INSERT INTO `peminjaman` (`id_pinjam`, `nim`, `id_fasilitas`, `deskripsi`, `tgl_pinjam`, `tgl_pengajuan`, `jam_mulai`, `jam_selesai`, `status`, `notes`) VALUES
+(1, '2210512056', 1, '201, 202, 203', '2024-06-30', '2024-06-17', '09:00:00', '12:00:00', 'Diterima', ''),
+(2, '2210512056', 4, '', '2024-07-04', '2024-06-17', '10:00:00', '13:00:00', 'Diterima', ''),
+(3, '2210512056', 2, '', '2024-06-10', '2024-05-16', '09:00:00', '12:00:00', 'Diterima', ''),
+(4, '2210512056', 3, '', '2024-06-11', '2024-05-10', '09:00:00', '12:00:00', 'Diterima', ''),
+(5, '2210512056', 5, '', '2024-06-12', '2024-05-28', '09:00:00', '12:00:00', 'Tidak Diterima', ''),
+(6, '2210512048', 3, '', '2024-06-14', '2024-05-16', '09:00:00', '12:00:00', 'Diterima', ''),
+(7, '2210512048', 6, '', '2024-07-18', '2024-06-18', '09:00:00', '12:00:00', 'Tidak Diterima', ''),
+(10, '2210512048', 10, '', '2024-07-20', '2024-06-18', '09:00:00', '12:00:00', 'Diproses', ''),
+(11, '2210512056', 11, '', '2024-07-18', '2024-06-18', '09:00:00', '12:00:00', 'Diterima', ''),
+(12, '2210512056', 12, '', '2024-07-15', '2024-06-18', '09:00:00', '12:00:00', 'Tidak Diterima', ''),
+(13, '2210512056', 13, '', '2024-06-14', '2024-05-10', '09:00:00', '12:00:00', 'Tidak Diterima', ''),
+(14, '2210512056', 4, '', '2024-06-29', '2024-06-19', '08:00:00', '16:00:00', 'Diterima', 'pakai ruangannya baik baik ya!!!');
 
 --
 -- Indexes for dumped tables
@@ -241,7 +285,7 @@ ALTER TABLE `peminjaman`
 -- AUTO_INCREMENT for table `disposisi`
 --
 ALTER TABLE `disposisi`
-  MODIFY `id_disposisi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_disposisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `fasilitas`
@@ -259,19 +303,19 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `kak`
 --
 ALTER TABLE `kak`
-  MODIFY `id_kak` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pembatalan`
 --
 ALTER TABLE `pembatalan`
-  MODIFY `id_batal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_batal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pinjam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

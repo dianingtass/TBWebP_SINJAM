@@ -4,9 +4,13 @@ include("config.php");
 if (isset($_POST['submit_status'])) {
     $id_pinjam = $_POST['id_pinjam'];
     $new_status = $_POST['status'];
-    $deskripsi = $_POST['deskripsi'];
     $notes = $_POST['notes'];
     $uploadOk = 1;
+
+    if (($new_status == 'Diterima' && (!isset($_FILES['fupload']) || $_FILES['fupload']['error'] != 0))) {
+        $disposisiError = "File disposisi harus diupload jika status 'Diterima'.";
+        $uploadOk = 0;
+    }
 
     if (isset($_FILES['fupload']) && $_FILES['fupload']['error'] == 0) {
         $target_dir = "disposisi/";
@@ -73,7 +77,6 @@ if (!empty($id_pinjam)) {
         $jam_mulai = $data['jam_mulai'];
         $jam_selesai = $data['jam_selesai'];
         $status = $data['status'];
-        $deskripsi = $data['deskripsi'];
         $notes = $data['notes'];
     } else {
         echo "Data tidak ditemukan.";
@@ -123,8 +126,12 @@ mysqli_close($conn);
 <?php include "navbarAdmin.php" ?>
 <br><br><br>
 
+
 <div class="container">
     <h2>Detail Peminjaman Fasilitas Universitas Pembangunan Nasional "Veteran" Jakarta</h2>
+    <?php if (!empty($disposisiError)): ?>
+        <div id="notifAlert" class="alert alert-danger"><?php echo $disposisiError; ?></div>
+    <?php endif; ?>
     <form method="post" action="detailPeminjaman.php" enctype="multipart/form-data">
         <div class="mb-3">
             <a href="download.php?id_pinjam=<?php echo htmlspecialchars($id_pinjam); ?>&type=kak"><b>Download KAK</b></a></div>
@@ -223,8 +230,8 @@ mysqli_close($conn);
     <br>
 </div>
 
+<br><br><br>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
 </body>
 
 <?php include "footerAdmin.php" ?>

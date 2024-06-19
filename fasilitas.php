@@ -108,7 +108,6 @@
               <p><strong><?php echo $row['nama_fasilitas']; ?></strong></p>
               <p><strong>Lokasi:</strong> <?php echo $lokasi_display; ?></p>
               <p><strong>PIC:</strong> <?php echo $row['pic']; ?></p>
-              <p><?php echo $row['deskripsi']; ?></p>
             </div>
           </div>
         </div>

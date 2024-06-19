@@ -11,7 +11,7 @@
 	<title>SINJAM UPNVJ</title>
 </head>
 
-<footer class="footer-section">
+<footer class="footer-section" id="footer-sec">
 	<div class="container relative">
     <div class="row">
       <div class="col-4 mt-5">
