@@ -69,7 +69,7 @@
     $search_id = isset($_GET['search_id']) ? mysqli_real_escape_string($conn, $_GET['search_id']) : '';
     $search_fasilitas = isset($_GET['search_fasilitas']) ? mysqli_real_escape_string($conn, $_GET['search_fasilitas']) : '';
 
-    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, 
+    $query = "SELECT p.id_pinjam, p.id_user, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, 
               CASE 
                 WHEN p.status = 'Diterima' THEN 'Selesai'
                 WHEN p.status = 'Diproses' THEN 'Selesai'
@@ -83,7 +83,7 @@
 
               UNION ALL
 
-              SELECT pb.id_pinjam, pb.nim, pb.id_fasilitas, pb.tgl_pinjam, pb.tgl_pengajuan, f.nama_fasilitas, 'Batal' AS status 
+              SELECT pb.id_pinjam, pb.id_user, pb.id_fasilitas, pb.tgl_pinjam, pb.tgl_pengajuan, f.nama_fasilitas, 'Batal' AS status 
               FROM pembatalan pb
               JOIN fasilitas f ON pb.id_fasilitas = f.id_fasilitas
               WHERE (pb.id_pinjam LIKE '%$search_id%')
@@ -160,7 +160,7 @@
           echo "<tr>";
           echo "<th scope=\"row\">$i</th>";
           echo "<td>$data[id_pinjam]</td>";
-          echo "<td>$data[nim]</td>";
+          echo "<td>$data[id_user]</td>";
           echo "<td>$nama_fasilitas</td>";
           echo "<td>$date_pinjam</td>";
           echo "<td>$date_pengajuan</td>";
