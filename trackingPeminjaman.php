@@ -1,7 +1,6 @@
 <?php
     include "authUser.php";
     include("config.php");
-    session_start();
     $nim = $_SESSION['id_user'];
 
     $sort_column = isset($_GET['sort']) ? $_GET['sort'] : 'id_pinjam';

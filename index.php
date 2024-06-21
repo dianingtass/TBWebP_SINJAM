@@ -22,9 +22,9 @@
                     $_SESSION['id_user'] = $row['id_user'];
                     $_SESSION['nama'] = $row['nama'];
                     $_SESSION['role'] = $row['role'];
+                    $_SESSION['loggedin'] = true;
 
                     if ($row['role'] == 2) {
-                        $_SESSION['loggedin'] = true;
                         header("Location: dashboard.php");
                         exit();
                     }

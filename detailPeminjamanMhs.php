@@ -36,7 +36,6 @@
     }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm_batal'])) {
-        session_start();
         $alasanPembatalan = $_POST['alasan'];
 
         $queryBatal = "INSERT INTO pembatalan (id_pinjam, id_user, id_fasilitas, tgl_pinjam, tgl_pengajuan, jam_mulai, jam_selesai, notes) 

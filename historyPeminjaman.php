@@ -1,7 +1,6 @@
 <?php
 include "authUser.php";
 include "config.php";
-session_start(); // Mulai sesi
 
 $nim = $_SESSION['id_user'];
 $query = "SELECT * FROM users WHERE id_user='$nim'";
