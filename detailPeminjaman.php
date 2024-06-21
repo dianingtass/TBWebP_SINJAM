@@ -69,7 +69,7 @@ if (!empty($id_pinjam)) {
 
     if ($result && mysqli_num_rows($result) > 0) {
         $data = mysqli_fetch_assoc($result);
-        $nim = $data['nim'];
+        $nim = $data['id_user'];
         $id_fasilitas = $data['id_fasilitas'];
         $nama_fasilitas = $data['nama_fasilitas'];
         $tgl_pinjam = date("d - m - Y", strtotime($data['tgl_pinjam']));

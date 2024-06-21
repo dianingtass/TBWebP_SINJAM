@@ -18,7 +18,7 @@
 
         if ($result && mysqli_num_rows($result) > 0) {
             $data = mysqli_fetch_assoc($result);
-            $nim = $data['nim'];
+            $nim = $data['id_user'];
             $id_fasilitas = $data['id_fasilitas'];
             $nama_fasilitas = $data['nama_fasilitas'];
             $tgl_pinjam = date("d - m - Y", strtotime($data['tgl_pinjam']));
@@ -35,10 +35,11 @@
     }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm_batal'])) {
+        session_start();
         $alasanPembatalan = $_POST['alasan'];
 
-        $queryBatal = "INSERT INTO pembatalan (id_pinjam, nim, id_fasilitas, tgl_pinjam, tgl_pengajuan, jam_mulai, jam_selesai, status, notes) 
-                VALUES ('$id_pinjam', '$nim', '$id_fasilitas', '{$data['tgl_pinjam']}', '{$data['tgl_pengajuan']}', '{$data['jam_mulai']}', '{$data['jam_selesai']}', 'Dibatalkan', '$alasanPembatalan')";
+        $queryBatal = "INSERT INTO pembatalan (id_pinjam, id_user, id_fasilitas, tgl_pinjam, tgl_pengajuan, jam_mulai, jam_selesai, notes) 
+                VALUES ('$id_pinjam', '$nim', '$id_fasilitas', '{$data['tgl_pinjam']}', '{$data['tgl_pengajuan']}', '{$data['jam_mulai']}', '{$data['jam_selesai']}', '$alasanPembatalan')";
         mysqli_query($conn, $queryBatal);
 
         $queryDeletePeminjaman = "DELETE FROM peminjaman WHERE id_pinjam = '$id_pinjam'";
@@ -47,6 +48,7 @@
         $queryDeleteKak = "DELETE FROM kak WHERE id_pinjam = '$id_pinjam'";
         mysqli_query($conn, $queryDeleteKak);
 
+        $_SESSION['pesan_batal'] = "Peminjaman dengan ID $id_pinjam telah berhasil dibatalkan.";
         header('Location: trackingPeminjaman.php');
         exit;
     }

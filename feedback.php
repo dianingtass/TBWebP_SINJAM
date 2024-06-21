@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {
     $email = mysqli_real_escape_string($conn, $email);
     $feedback = mysqli_real_escape_string($conn, $feedback);
 
-    $query = "INSERT INTO feedback (nim, nama, email, feedback) VALUES ('$nim', '$nama', '$email', '$feedback')";
+    $query = "INSERT INTO feedback (id_user, nama, email, feedback) VALUES ('$nim', '$nama', '$email', '$feedback')";
     $result = mysqli_query($conn, $query);
 
     if ($result) {

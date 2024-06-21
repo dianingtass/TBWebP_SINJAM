@@ -16,10 +16,13 @@
 		$tgl_pengajuan1 = new DateTime($tgl_pengajuan);
         $tgl_pinjam1 = new DateTime($tgl_pinjam);
         $interval = $tgl_pengajuan1->diff($tgl_pinjam1);
-        $selisih_hari = $interval->days;
+        $selisih_hari = 0;
+		if ($tgl_pinjam1 >= $tgl_pengajuan1){
+			$selisih_hari = $interval->days;
+		}
         
         // Jika selisih hari kurang dari 10 hari, tampilkan pesan kesalahan
-		$queryNim = "SELECT nim FROM mahasiswa WHERE nim='$nim'";
+		$queryNim = "SELECT id_user FROM users WHERE id_user='$nim'";
 		$resultNim = mysqli_query($conn, $queryNim);
 
 		$nimError = $namaError = $fasilitasError = $hariError = $jamError = $kakError = "";
@@ -35,7 +38,7 @@
 			}
 		}
 
-		$queryNama = "SELECT nama FROM mahasiswa WHERE nim='$nim'";
+		$queryNama = "SELECT nama FROM users WHERE id_user='$nim'";
 		$resultNama = mysqli_query($conn, $queryNama);
 
 		if (empty($nama)){
@@ -108,11 +111,11 @@
 			if ($nm_file) {
 				$dir = "KAK/" . $nm_file;
 				move_uploaded_file($tmp_file, $dir);
-				$sql_peminjaman = "INSERT INTO peminjaman(nim, id_fasilitas, deskripsi, tgl_pinjam, tgl_pengajuan, jam_mulai, jam_selesai, status) VALUES ('$nim', $fasilitas, '$deskripsi', '$tgl_pinjam', '$tgl_pengajuan', '$jam_mulai', '$jam_selesai', 1)";
+				$sql_peminjaman = "INSERT INTO peminjaman(id_user, id_fasilitas, deskripsi, tgl_pinjam, tgl_pengajuan, jam_mulai, jam_selesai, status) VALUES ('$nim', $fasilitas, '$deskripsi', '$tgl_pinjam', '$tgl_pengajuan', '$jam_mulai', '$jam_selesai', 1)";
 				$queryPinjam = mysqli_query($conn, $sql_peminjaman) or die(mysqli_error($conn));
 	
 				if ($queryPinjam) {
-					$idPinjam = "SELECT id_pinjam FROM peminjaman WHERE nim='$nim' AND id_fasilitas='$fasilitas' AND tgl_pengajuan='$tgl_pengajuan' LIMIT 1";
+					$idPinjam = "SELECT id_pinjam FROM peminjaman WHERE id_user='$nim' AND id_fasilitas='$fasilitas' AND tgl_pengajuan='$tgl_pengajuan' LIMIT 1";
 					$query = mysqli_query($conn, $idPinjam);
 					if ($query && $row = mysqli_fetch_assoc($query)) {
 						$id_pinjam = $row['id_pinjam'];

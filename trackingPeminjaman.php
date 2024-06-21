@@ -1,7 +1,7 @@
 <?php
     include("config.php");
     session_start();
-    $nim = $_SESSION['nim'];
+    $nim = $_SESSION['id_user'];
 
     $sort_column = isset($_GET['sort']) ? $_GET['sort'] : 'id_pinjam';
     $sort_order = isset($_GET['order']) && $_GET['order'] == 'asc' ? 'asc' : 'desc';
@@ -25,7 +25,7 @@
     $query = "SELECT p.id_pinjam, f.nama_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, p.status 
         FROM peminjaman p
         JOIN fasilitas f ON p.id_fasilitas = f.id_fasilitas
-        WHERE (p.nim='$nim') 
+        WHERE (p.id_user='$nim') 
         AND (p.id_pinjam LIKE '%$search_id%')
         AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
         AND (p.tgl_pinjam >= CURDATE())
@@ -72,6 +72,14 @@
 
     <div class="container">
         <br>
+        <?php
+        if (isset($_SESSION['pesan_batal'])) {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+            echo $_SESSION['pesan_batal'];
+            echo '</div>';
+            unset($_SESSION['pesan_batal']);
+        }
+        ?>
         <h2>Lacak Peminjaman</h2>
         <br>
 

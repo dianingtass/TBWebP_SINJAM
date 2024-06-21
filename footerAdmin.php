@@ -19,7 +19,9 @@
       </div>
       <div class="col-4">
         <div class="mb-4 footer-h1">Menu</div>
-        <p class="mb-2"><a href="index.php">Log Out</a></p>
+        <form method="post" action="" enctype="multipart/form-data">
+          <button type="submit" name="logout" class="logout">Log Out</button>
+        </form>
       </div>
       <div class="col-4">
         <div class="ml-9">

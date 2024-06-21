@@ -2,65 +2,54 @@
     include("config.php");
     session_start();
 
-    $usernameErrMhs = $passErrMhs = "";
-    $usernameErrAdm = $passErrAdm = "";
+    $usernameErr = $passErr = "";
 
     if (isset($_POST["loginMhs"])) {
         $username = htmlentities(strip_tags(trim($_POST["username-mhs"])));
         $password = htmlentities(strip_tags(trim($_POST["password-mhs"])));
 
         if (empty($username)) {
-            $usernameErrMhs = "Email/ NIM masih kosong. Mohon isi terlebih dahulu!";
+            $usernameErr = "Email/ NIM masih kosong. Mohon isi terlebih dahulu!";
         }
         else {
-            $query = "SELECT * FROM mahasiswa WHERE email='$username' OR nim='$username'";
+            $query = "SELECT * FROM users WHERE email='$username' OR id_user='$username' LIMIT 1";
             $result = mysqli_query($conn, $query);
 
-            if (mysqli_num_rows($result) > 0) {
+            if (mysqli_num_rows($result)) {
                 $row = mysqli_fetch_assoc($result);
 
                 if($password == $row['password']) {
-                    $_SESSION['nim'] = $row['nim'];
-                    header("Location: dashboard.php");
-                    exit();
+                    $_SESSION['id_user'] = $row['id_user'];
+                    $_SESSION['nama'] = $row['nama'];
+                    $_SESSION['role'] = $row['role'];
+
+                    if ($row['role'] == 2) {
+                        header("Location: dashboard.php");
+                        exit();
+                    }
+                    else {
+                        $passErr = "Anda bukan admin!";
+                    }
                 }
                 else {
-                    $passErrMhs = "Password salah!";
+                    $passErr = "Password salah!";
                 }
             }
             else {
-                $usernameErrMhs = "Email/ NIM tidak tersedia!";
+                $usernameErr = "Email/ NIM tidak tersedia!";
             }
         }
     }
 
-    if (isset($_POST["loginAdm"])) {
-        $username = htmlentities(strip_tags(trim($_POST["username-adm"])));
-        $password = htmlentities(strip_tags(trim($_POST["password-adm"])));
-
-        if (empty($username)) {
-            $usernameErrAdm = "Email/ NIP masih kosong. Mohon isi terlebih dahulu!";
-        }
-        else {
-            $query = "SELECT * FROM adminupn WHERE email='$username' OR nip='$username'";
-            $result = mysqli_query($conn, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_assoc($result);
-
-                if($password == $row['password']) {
-                    header("Location: managePeminjaman.php");
-                    exit();
-                }
-                else {
-                    $passErrAdm = "Password salah!";
-                }
-            }
-            else {
-                $usernameErrAdm = "Email/ NIP salah!";
-            }
-        }
+    if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] == 2) { // Role 2 untuk Mahasiswa
+        header("Location: dashboard.php");
+        exit();
+    } elseif ($_SESSION['role'] == 1) { // Role 1 untuk Admin
+        header("Location: managePeminjaman.php");
+        exit();
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -205,41 +194,6 @@
                         </div>
                     </form>
                 </div>
-                <div class="login-admin">
-                    <h4><a href="#" data-toggle="modal" data-target="#loginModalAdm" data-dismiss="modal">Masuk sebagai Admin</a></h4>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL LOGIN ADMIN -->
-    <div class="modal" id="loginModalAdm" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Login Admin</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="loginFormAdm" method="post" action="" enctype="multipart/form-data">
-                        <label>Username</label>
-                        <input type="text" class="form-control" id="username-adm" name="username-adm" placeholder="Email/ NIP">
-
-                        <label>Password</label>
-                        <input type="password" class="form-control" id="password-adm" name="password-adm" placeholder="Password">
-
-                        <div id="notifAlertAdm" class="alert alert-danger" style="display: none;"></div>
-
-                        <div class="modal-footer justify-content-center">
-                            <input id="submitAdm" type="submit" class="btn btn-primary" name="loginAdm" value="Login">
-                        </div>
-                    </form>
-                </div>
-                <div class="login-admin">
-                    <h4><a href="#" data-toggle="modal" data-target="#loginModalMhs" data-dismiss="modal">Masuk sebagai Mahasiswa</a></h4>
-                </div>
             </div>
         </div>
     </div>
@@ -295,32 +249,19 @@
     });
 
     document.addEventListener("DOMContentLoaded", function() {
-        var usernameErrMhs = "<?php echo $usernameErrMhs; ?>";
-        var passErrMhs = "<?php echo $passErrMhs; ?>";
-        var usernameErrAdm = "<?php echo $usernameErrAdm; ?>";
-        var passErrAdm = "<?php echo $passErrAdm; ?>";
+        var usernameErr = "<?php echo $usernameErr; ?>";
+        var passErr = "<?php echo $passErr; ?>";
 
-        if (usernameErrMhs || passErrMhs) {
+        if (usernameErr || passErr) {
             var alertBox = document.getElementById("notifAlertMhs");
-            if (usernameErrMhs) {
-                alertBox.textContent = usernameErrMhs;
+            if (usernameErr) {
+                alertBox.textContent = usernameErr;
             } 
             else {
-                alertBox.textContent = passErrMhs;
+                alertBox.textContent = passErr;
             }
             alertBox.style.display = "block";
             $('#loginModalMhs').modal('show');
-        }
-
-        if (usernameErrAdm || passErrAdm) {
-            var alertBox = document.getElementById("notifAlertAdm");
-            if (usernameErrAdm) {
-                alertBox.textContent = usernameErrAdm;
-            } else {
-                alertBox.textContent = passErrAdm;
-            }
-            alertBox.style.display = "block";
-            $('#loginModalAdm').modal('show');
         }
     });
 </script>

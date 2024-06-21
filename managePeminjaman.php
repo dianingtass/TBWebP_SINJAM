@@ -59,7 +59,7 @@
 
     $valid_sort_columns = [
       'id_pinjam' => 'id_pinjam',
-      'nim' => 'nim',
+      'nim' => 'id_user',
       'fasilitas' => 'nama_fasilitas',
       'tgl_pinjam' => 'tgl_pinjam',
       'tgl_pengajuan' => 'tgl_pengajuan',
@@ -74,11 +74,11 @@
     $search_nim = isset($_GET['search_nim']) ? mysqli_real_escape_string($conn, $_GET['search_nim']) : '';
     $search_fasilitas = isset($_GET['search_fasilitas']) ? mysqli_real_escape_string($conn, $_GET['search_fasilitas']) : '';
 
-    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, p.status
+    $query = "SELECT p.id_pinjam, p.id_user, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, p.status
               FROM peminjaman p
               JOIN fasilitas f ON p.id_fasilitas = f.id_fasilitas
               WHERE (p.id_pinjam LIKE '%$search_id%') 
-                AND (p.nim LIKE '%$search_nim%') 
+                AND (p.id_user LIKE '%$search_nim%') 
                 AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
                 AND (p.tgl_pinjam >= CURDATE())
                 ORDER BY {$valid_sort_columns[$sort_column]} $sort_order";
@@ -93,31 +93,31 @@
         <tr>
           <th>No.</th>
           <th>
-            <a href="?sort=id_pinjam&order=<?php echo ($sort_column == 'id_pinjam' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
+            <a href="?sort=id_pinjam&order=<?php echo ($sort_column == 'id_pinjam' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
               ID Peminjaman 
               <i class="fas fa-caret-<?php echo ($sort_column == 'id_pinjam' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
             </a>
           </th>
           <th>
-            <a href="?sort=nim&order=<?php echo ($sort_column == 'nim' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
+            <a href="?sort=nim&order=<?php echo ($sort_column == 'nim' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
               NIM 
               <i class="fas fa-caret-<?php echo ($sort_column == 'nim' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
             </a>
           </th>
           <th>
-            <a href="?sort=id_fasilitas&order=<?php echo ($sort_column == 'id_fasilitas' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
+            <a href="?sort=fasilitas&order=<?php echo ($sort_column == 'fasilitas' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
               Nama Fasilitas 
-              <i class="fas fa-caret-<?php echo ($sort_column == 'id_fasilitas' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
+              <i class="fas fa-caret-<?php echo ($sort_column == 'fasilitas' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
             </a>
           </th>
           <th>
-            <a href="?sort=tgl_pinjam&order=<?php echo ($sort_column == 'tgl_pinjam' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
+            <a href="?sort=tgl_pinjam&order=<?php echo ($sort_column == 'tgl_pinjam' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
               Tanggal Peminjaman 
               <i class="fas fa-caret-<?php echo ($sort_column == 'tgl_pinjam' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
             </a>
           </th>
           <th>
-            <a href="?sort=tgl_pengajuan&order=<?php echo ($sort_column == 'tgl_pengajuan' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_id_fasilitas=<?php echo $search_id_fasilitas; ?>">
+            <a href="?sort=tgl_pengajuan&order=<?php echo ($sort_column == 'tgl_pengajuan' && $sort_order == 'asc') ? 'desc' : 'asc'; ?>&search_id=<?php echo $search_id; ?>&search_nim=<?php echo $search_nim; ?>&search_fasilitas=<?php echo $search_fasilitas; ?>">
               Tanggal Pengajuan 
               <i class="fas fa-caret-<?php echo ($sort_column == 'tgl_pengajuan' && $sort_order == 'asc') ? 'up' : 'down'; ?>"></i>
             </a>
@@ -143,7 +143,7 @@
             echo "<tr>";
             echo "<th scope=\"row\">$i</th>";
             echo "<td>$data[id_pinjam]</td>";
-            echo "<td>$data[nim]</td>";
+            echo "<td>$data[id_user]</td>";
             echo "<td>$nama_fasilitas</td>";
             echo "<td>$date_pinjam</td>";
             echo "<td>$date_pengajuan</td>";

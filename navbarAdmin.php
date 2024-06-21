@@ -1,3 +1,14 @@
+<?php
+  session_start();
+
+  if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
+    exit();
+  }
+?>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,8 +35,12 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarsFurni">
-                    <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-						<li><a class="nav-link" href="index.php">Log Out</a></li>
+          <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+            <li>
+              <form method="post" action="" enctype="multipart/form-data">
+                <button type="submit" name="logout" class="logout">Log Out</button>
+              </form>
+            </li>
 					</ul>
 				</div>
 			</div>	
@@ -59,14 +74,15 @@
     .custom-navbar .custom-navbar-nav li {
       margin-left: 15px;
       margin-right: 15px; } }
-  .custom-navbar .custom-navbar-nav li a {
+  .custom-navbar .custom-navbar-nav li a, .logout {
     font-weight: 500;
     color: #ffffff !important;
     opacity: .5;
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease;
-    position: relative; }
+    position: relative; 
+    margin-bottom: 0 !important;}
     @media (min-width: 768px) {
       .custom-navbar .custom-navbar-nav li a:before {
         content: "";
@@ -105,4 +121,9 @@
       margin-right: 0px; }
       .custom-navbar .custom-navbar-cta li:first-child {
         margin-right: 20px; }
+  
+  .logout{
+    background: none;
+    border: 0;
+  }
 </style>

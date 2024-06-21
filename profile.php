@@ -2,8 +2,8 @@
 include "config.php";
 session_start(); // Mulai sesi
 
-$nim = $_SESSION['nim'];
-$query = "SELECT * FROM mahasiswa WHERE nim='$nim'";
+$nim = $_SESSION['id_user'];
+$query = "SELECT * FROM users WHERE id_user='$nim'";
 $result = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($result) > 0) {
@@ -16,6 +16,12 @@ if (mysqli_num_rows($result) > 0) {
     echo "Informasi pengguna tidak ditemukan.";
 }
 
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,15 +74,16 @@ if (mysqli_num_rows($result) > 0) {
                                             <?php echo htmlspecialchars($fakultas); ?><br>
                                             <?php echo htmlspecialchars($program_studi); ?>
                                         </small><br><br>
-                                        <a href="index.php"><button type="button" class="btn btn-outline-danger">Log Out</button></a>&emsp;
-                                        <a href="trackingPeminjaman.php"><button class="btn btn-primary" type="submit">Lacak Peminjaman</button></a>
+                                        <form method="post" action="" enctype="multipart/form-data">
+                                            <button type="submit" class="btn btn-outline-danger" name="logout">Log Out</button>
+                                            <a class="btn btn-primary" href="trackingPeminjaman.php">Lacak Peminjaman</a>
+                                        </form>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
             </div>
         </content>
 

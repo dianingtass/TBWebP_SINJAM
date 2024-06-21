@@ -55,7 +55,7 @@
 
     $valid_sort_columns = [
       'id_pinjam' => 'id_pinjam',
-      'nim' => 'nim',
+      'nim' => 'id_user',
       'fasilitas' => 'nama_fasilitas',
       'tgl_pinjam' => 'tgl_pinjam',
       'tgl_pengajuan' => 'tgl_pengajuan',
@@ -70,11 +70,11 @@
     $search_nim = isset($_GET['search_nim']) ? mysqli_real_escape_string($conn, $_GET['search_nim']) : '';
     $search_fasilitas = isset($_GET['search_fasilitas']) ? mysqli_real_escape_string($conn, $_GET['search_fasilitas']) : '';
 
-    $query = "SELECT p.id_pinjam, p.nim, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, p.status
+    $query = "SELECT p.id_pinjam, p.id_user, p.id_fasilitas, p.tgl_pinjam, p.tgl_pengajuan, f.nama_fasilitas, p.status
               FROM peminjaman p
               JOIN fasilitas f ON p.id_fasilitas = f.id_fasilitas
               WHERE (p.id_pinjam LIKE '%$search_id%') 
-                AND (p.nim LIKE '%$search_nim%') 
+                AND (p.id_user LIKE '%$search_nim%') 
                 AND (f.nama_fasilitas LIKE '%$search_fasilitas%')
                 AND (p.status != 'Tidak Diterima')
               ORDER BY {$valid_sort_columns[$sort_column]} $sort_order";
@@ -140,7 +140,7 @@
           echo "<tr>";
           echo "<th scope=\"row\">$i</th>";
           echo "<td>$data[id_pinjam]</td>";
-          echo "<td>$data[nim]</td>";
+          echo "<td>$data[id_user]</td>";
           echo "<td>$nama_fasilitas</td>";
           echo "<td>$date_pinjam</td>";
           echo "<td>$date_pengajuan</td>";
