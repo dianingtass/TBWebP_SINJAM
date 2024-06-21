@@ -1,4 +1,5 @@
 <?php
+include "authAdmin.php";
 include("config.php");
 
 if (isset($_POST['submit_status'])) {

@@ -1,4 +1,5 @@
 <?php
+include "authUser.php";
 include("config.php");
 
 $message = "";

@@ -1,3 +1,5 @@
+<?php include "authUser.php";?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

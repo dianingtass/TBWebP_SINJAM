@@ -1,3 +1,5 @@
+<?php include "authAdmin.php";?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

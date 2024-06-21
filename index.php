@@ -24,6 +24,7 @@
                     $_SESSION['role'] = $row['role'];
 
                     if ($row['role'] == 2) {
+                        $_SESSION['loggedin'] = true;
                         header("Location: dashboard.php");
                         exit();
                     }
