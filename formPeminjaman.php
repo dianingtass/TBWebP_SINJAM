@@ -158,7 +158,9 @@
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/tiny-slider.js"></script>
 		<script src="js/custom.js"></script>
-		<?php include "navbar.php" ?>
+		<?php 
+		$currentPage = 'formPeminjaman.php';
+		include "navbar.php" ?>
 
 		<div class="untree_co-section">
 		    <div class="container">

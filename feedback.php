@@ -44,7 +44,9 @@ if (isset($_POST["submit"])) {
 </head>
 
 <!-- TEMPLATE NAVBAR -->
-<?php include "navbar.php" ?>
+<?php 
+$currentPage = 'feedback.php';
+include "navbar.php" ?>
     <br><br><br>
 
 <div class="container">

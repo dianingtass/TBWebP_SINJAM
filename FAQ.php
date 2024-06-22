@@ -25,7 +25,10 @@
 		<script src="js/custom.js"></script>
 
 		<!-- Navbar -->
-		<?php include "navbar.php"?>
+         
+		<?php 
+        $currentPage = 'FAQ.php';
+        include "navbar.php"?>
         <br><br>
 		
 

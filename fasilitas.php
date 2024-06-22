@@ -16,7 +16,9 @@
   <link href="css/fasilitas_style.css" rel="stylesheet">
 </head>
 <body>
-<?php include "navbar.php" ?>
+<?php 
+$currentPage = 'fasilitas.php';
+include "navbar.php" ?>
 <br><br>
 
 

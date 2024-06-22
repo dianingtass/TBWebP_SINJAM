@@ -48,7 +48,9 @@ if (isset($_POST['logout'])) {
 		<script src="js/tiny-slider.js"></script>
 		<script src="js/custom.js"></script>
 		<!-- Navbar -->
-		<?php include "navbar.php" ?>
+		<?php 
+        $currentPage = 'profile.php';
+        include "navbar.php" ?>
         <br><br><br>
 		
 		<!-- Content -->

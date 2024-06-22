@@ -18,7 +18,9 @@
 </head>
 <body>
 
-<?php include "navbar.php" ?>
+<?php 
+$currentPage = 'cekKetersediaan.php';
+include "navbar.php" ?>
 
 <br><br>
 <div class="container">

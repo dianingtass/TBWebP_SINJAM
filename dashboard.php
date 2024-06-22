@@ -18,7 +18,9 @@
 </head>
 <body>
 
-    <?php include "navbar.php" ?>
+    <?php 
+    $currentPage = 'dashboard.php';
+    include "navbar.php" ?>
 
 <!-- Start Hero Section -->
 <div class="hero">

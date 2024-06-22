@@ -22,6 +22,7 @@
         <form method="post" action="" enctype="multipart/form-data">
           <button type="submit" name="logout" class="logout-footer">Log Out</button>
         </form>
+        <a href="layoutFeedback.php">Feedback</a>
       </div>
       <div class="col-4">
         <div class="ml-9">
@@ -52,10 +53,11 @@
     background: #eef6f8;
     font-family: 'Gotham';
   }
+
   .footer-section .relative {
     position: relative;
   }
-  .footer-section a, .logout-footer {
+  .footer-section a {
     text-decoration: none;
     color: #2f2f2f;
     -webkit-transition: .3s all ease;
@@ -65,14 +67,18 @@
   .footer-section a:hover, .logout-footer:hover {
     color: #208aae; 
   }
+
   .footer-section .relative ul li {
       margin-bottom: 10px; 
   }
+
   .footer-section .footer-h1 {
     font-size: 20px;
     font-weight: bold;
     text-decoration: none;
-    color: black; }
+    color: black; 
+  }
+
   .footer-section .border-top {
     border-color: #dce5e4; 
   }
@@ -84,7 +90,8 @@
   }
     
   .footer-section .border-top.copyright {
-    font-size: 14px !important; }
+    font-size: 14px !important; 
+  }
 
   @media (max-width: 768px) {
     .logo-link {
