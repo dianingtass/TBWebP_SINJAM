@@ -62,7 +62,7 @@
     -o-transition: .3s all ease;
     transition: .3s all ease; 
   }
-  .footer-section a:hover, #logout:hover {
+  .footer-section a:hover, .logout-footer:hover {
     color: #208aae; 
   }
   .footer-section .relative ul li {

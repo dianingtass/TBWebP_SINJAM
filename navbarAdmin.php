@@ -72,7 +72,7 @@
     .custom-navbar .custom-navbar-nav li {
       margin-left: 15px;
       margin-right: 15px; } }
-  .custom-navbar .custom-navbar-nav li a, .logout-navbar {
+  .custom-navbar .custom-navbar-nav li .logout-navbar {
     font-weight: 500;
     color: #ffffff;
     opacity: .5;
@@ -85,10 +85,13 @@
   .logout-navbar{
     background: none;
     border: 0;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
     @media (min-width: 768px) {
-      .custom-navbar .custom-navbar-nav li a:before {
+      .custom-navbar .custom-navbar-nav li .logout-navbar:before {
         content: "";
         position: absolute;
         bottom: 0;
@@ -103,13 +106,13 @@
         -webkit-transition: .15s all ease-out;
         -o-transition: .15s all ease-out;
         transition: .15s all ease-out; } }
-    .custom-navbar .custom-navbar-nav li a:hover {
+    .custom-navbar .custom-navbar-nav li .logout-navbar:hover {
       opacity: 1; }
-      .custom-navbar .custom-navbar-nav li a:hover:before {
+      .custom-navbar .custom-navbar-nav li .logout-navbar:hover:before {
         width: calc(100% - 16px); }
-  .custom-navbar .custom-navbar-nav li.active a {
+  .custom-navbar .custom-navbar-nav li.active .logout-navbar {
     opacity: 1; }
-    .custom-navbar .custom-navbar-nav li.active a:before {
+    .custom-navbar .custom-navbar-nav li.active .logout-navbar:before {
       width: calc(100% - 16px); }
   .custom-navbar .custom-navbar-cta {
     margin-left: 0 !important;
