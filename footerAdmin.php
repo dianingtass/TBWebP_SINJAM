@@ -20,7 +20,7 @@
       <div class="col-4">
         <div class="mb-4 footer-h1">Menu</div>
         <form method="post" action="" enctype="multipart/form-data">
-          <button type="submit" name="logout" class="logout">Log Out</button>
+          <button type="submit" name="logout" class="logout-footer">Log Out</button>
         </form>
       </div>
       <div class="col-4">
@@ -55,14 +55,14 @@
   .footer-section .relative {
     position: relative;
   }
-  .footer-section a {
+  .footer-section a, .logout-footer {
     text-decoration: none;
     color: #2f2f2f;
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease; 
   }
-  .footer-section a:hover {
+  .footer-section a:hover, #logout:hover {
     color: #208aae; 
   }
   .footer-section .relative ul li {
@@ -75,6 +75,12 @@
     color: black; }
   .footer-section .border-top {
     border-color: #dce5e4; 
+  }
+
+  .logout-footer{
+    background: none;
+    border: 0;
+    padding: 0;
   }
     
   .footer-section .border-top.copyright {

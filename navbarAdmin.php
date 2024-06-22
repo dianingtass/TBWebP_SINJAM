@@ -36,7 +36,7 @@
           <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
             <li>
               <form method="post" action="" enctype="multipart/form-data">
-                <button type="submit" name="logout" class="logout">Log Out</button>
+                <button type="submit" name="logout" class="logout-navbar">Log Out</button>
               </form>
             </li>
 					</ul>
@@ -72,15 +72,21 @@
     .custom-navbar .custom-navbar-nav li {
       margin-left: 15px;
       margin-right: 15px; } }
-  .custom-navbar .custom-navbar-nav li a, .logout {
+  .custom-navbar .custom-navbar-nav li a, .logout-navbar {
     font-weight: 500;
-    color: #ffffff !important;
+    color: #ffffff;
     opacity: .5;
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease;
     position: relative; 
     margin-bottom: 0 !important;}
+    
+  .logout-navbar{
+    background: none;
+    border: 0;
+  }
+
     @media (min-width: 768px) {
       .custom-navbar .custom-navbar-nav li a:before {
         content: "";
@@ -119,9 +125,4 @@
       margin-right: 0px; }
       .custom-navbar .custom-navbar-cta li:first-child {
         margin-right: 20px; }
-  
-  .logout{
-    background: none;
-    border: 0;
-  }
 </style>
