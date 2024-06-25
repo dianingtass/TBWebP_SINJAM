@@ -19,10 +19,11 @@
       </div>
       <div class="col-4">
         <div class="mb-4 footer-h1">Menu</div>
+        <p class="mb-2"><a href="managePeminjaman.php">Manage</a></p>
+        <p class="mb-2"><a href="layoutFeedback.php">Feedback</a></p>
         <form method="post" action="" enctype="multipart/form-data">
-          <button type="submit" name="logout" class="logout-footer">Log Out</button>
+          <button type="submit" name="logout" class="logout-footer">Log Out</button><br>
         </form>
-        <a href="layoutFeedback.php">Feedback</a>
       </div>
       <div class="col-4">
         <div class="ml-9">
@@ -68,7 +69,7 @@
     color: #208aae; 
   }
 
-  .footer-section .relative ul li {
+  .footer-section .relative ul li, form button, form a {
       margin-bottom: 10px; 
   }
 

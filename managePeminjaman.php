@@ -1,4 +1,6 @@
-<?php include "authAdmin.php";?>
+<?php
+include "authAdmin.php";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,7 @@
 
 <body>
 <!-- TEMPLATE NAVBAR -->
-<?php include "navbarAdmin.php" ?>
+<?php $currentPage = "managePeminjaman.php";include "navbarAdmin.php"; ?>
 <br><br><br>
 
 <div class="container">
