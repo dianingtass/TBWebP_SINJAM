@@ -2,6 +2,18 @@
     include("config.php");
     session_start();
 
+    function generateCsrfToken() {
+        return bin2hex(random_bytes(32));
+    }
+    
+    function verifyCsrfToken($token) {
+        return hash_equals($_SESSION['csrf_token'], $token);
+    }
+    
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = generateCsrfToken();
+    }
+
     $usernameErr = $passErr = "";
 
     if (isset($_POST["loginMhs"])) {
@@ -60,6 +72,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png">
     <link href="css\index_style.css" rel="stylesheet">
+    <link href="css/index_bootstrap.min.css" rel="stylesheet">
 
     <!-- ICON DAN FONT -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
@@ -67,9 +80,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     
-    <!-- BOOTSTRAP CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
     <title>SINJAM UPNVJ</title>
 </head>
 <body>
@@ -188,6 +198,7 @@
                         <label>Password</label>
                         <input type="password" class="form-control" id="password-mhs" name="password-mhs" placeholder="Password">
 
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <div id="notifAlertMhs" class="alert alert-danger" style="display: none;"></div>
 
                         <div class="modal-footer justify-content-center">
@@ -234,9 +245,9 @@
     </footer>
 
 <!-- BOOTSTRAP -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="js/jquery-3.5.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 <script>
     $(document).ready(function() {

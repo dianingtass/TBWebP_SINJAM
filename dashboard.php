@@ -216,7 +216,7 @@
                 <p>Bagaimana cara menghubungi pihak UPNVJ jika saya membutuhkan bantuan terkait peminjaman fasilitas?</p>
             </div>
         </div>
-        <a href="faq.php" class="btn btn-secondary me-2">Telusuri Lebih Lanjut</a>
+        <a href="FAQ.php" class="btn btn-secondary me-2">Telusuri Lebih Lanjut</a>
     </div>
         <!-- End FAQ Section -->
          
